@@ -57412,7 +57412,7 @@ b7(){var s=A.agf("_HomeController.profile"),r=A.agf("_HomeController.loading")
 $.aeY()
 return new A.wv(new A.Bv(s,r,new A.Po(),new A.Vn()),B.z)}}
 A.wv.prototype={
-lw(){var s=0,r=A.T(t.N),q,p=this,o,n,m
+lw(){var s=0,r=A.T(t.N),q,p=this,o,n,m,l
 var $async$lw=A.U(function(a,b){if(a===1)return A.Q(b,r)
 while(true)switch(s){case 0:p.aO(new A.a6a(p))
 s=3
@@ -57420,11 +57420,12 @@ return A.F(A.a2n("a8b5087ee6bb4bf6beac9b7498727df1","https://thatrohit.github.io
 case 3:o=b
 A.hW("SPOTIFY TOKEN -> "+o)
 p.aO(new A.a6b(p))
-n=A
-m="PROFILE -> "
 s=4
 return A.F(p.e.a.nZ("Bearer "+o),$async$lw)
-case 4:n.hW(m+b.h(0))
+case 4:n=b
+m="PROFILE -> "+A.d(n.b)+", "
+l=n.y
+A.hW(m+A.d(l==null?null:B.c.gB(l).a))
 q=o
 s=1
 break
