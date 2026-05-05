@@ -7,70 +7,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// ════════════════════════════════════════════════════════════════
-//  ★  DAILY DATA — UPDATED AUTOMATICALLY BY CLAUDE  ★
-// ════════════════════════════════════════════════════════════════
 const DATA = [
-  {
-    day:"DAY 1", date:"2025-05-04", label:"Mon, May 4", workout:"Push · Strength",
-    calories:2050, protein:170, carbs:173, fat:45, weight:null,
-    sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
-           deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,
-           deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}
-  },
-  {
-    day:"DAY 2", date:"2025-05-05", label:"Tue, May 5", workout:"Pull · Strength",
-    calories:2476, protein:169, carbs:222, fat:103, weight:58.1,
-    sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
-           deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,
-           deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}
-  },
-  // ← Claude adds new entries here
+  {day:"DAY 1",date:"2025-05-04",label:"Mon, May 4",workout:"Push · Strength",
+   calories:2050,protein:170,carbs:173,fat:45,weight:null,
+   sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
+          deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}},
+  {day:"DAY 2",date:"2025-05-05",label:"Tue, May 5",workout:"Pull · Strength",
+   calories:2476,protein:169,carbs:222,fat:103,weight:58.1,
+   sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
+          deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}},
 ];
-const T = { cal:2650, prot:180, carbs:290, fat:86, sleep:7.5 };
+const T={cal:2650,prot:180,carbs:290,fat:86,sleep:7.5};
 </script>
 <style>
-:root{
-  --navy:#0f1923;--navy-mid:#162030;--navy-card:#1a2a3a;--navy-border:#1e3448;
+:root{--navy:#0f1923;--navy-mid:#162030;--navy-card:#1a2a3a;--navy-border:#1e3448;
   --cyan:#00c8f0;--mint:#00e8a8;--amber:#f0a800;--rose:#f05070;--purple:#c080ff;
-  --text:#e8f0f8;--muted:#7a9bb5;
-}
+  --text:#e8f0f8;--muted:#7a9bb5;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif;min-height:100vh;}
+/* NAV */
+.topnav{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:10px 32px;}
+.topnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-label{font-family:"Rajdhani",sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.nav-link{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);text-decoration:none;padding:6px 16px;border:1px solid rgba(0,200,240,0.25);border-radius:6px;transition:background 0.15s;}
+.nav-link:hover{background:rgba(0,200,240,0.08);}
+/* HERO */
 .hero{background:linear-gradient(135deg,#0a1520 0%,#0d1e2e 50%,#091525 100%);border-bottom:1px solid var(--navy-border);position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,200,240,0.05) 0%,transparent 60%);pointer-events:none;}
-.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;min-height:200px;}
-.hero-photo{width:160px;flex-shrink:0;position:relative;overflow:hidden;border-right:1px solid var(--navy-border);}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;height:220px;}
+.hero-photo{width:165px;flex-shrink:0;position:relative;overflow:hidden;border-right:1px solid var(--navy-border);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
 .photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(9,21,37,0.92));padding:18px 10px 8px;text-align:center;}
 .photo-label .at{font-size:0.56rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
 .photo-label .an{font-family:"Rajdhani",sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:3px;color:var(--cyan);line-height:1;}
-.hero-center{flex:1;padding:26px 28px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--navy-border);}
+.hero-center{flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--navy-border);}
 .hero-tag{font-size:0.6rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;}
-.hero-name{font-family:"Rajdhani",sans-serif;font-size:2.8rem;font-weight:700;letter-spacing:5px;color:var(--text);line-height:1;margin-bottom:5px;}
-.hero-sub{font-size:0.68rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.hero-name{font-family:"Rajdhani",sans-serif;font-size:2.6rem;font-weight:700;letter-spacing:5px;color:var(--text);line-height:1;margin-bottom:5px;}
+.hero-sub{font-size:0.66rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
 .hbadges{display:flex;gap:7px;flex-wrap:wrap;}
 .hb{background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.16);border-radius:20px;padding:3px 10px;font-size:0.64rem;color:var(--muted);}
 .hb span{color:var(--cyan);font-weight:600;}
-.hero-stats{width:270px;flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;}
-.sbox{padding:18px 14px;border-bottom:1px solid var(--navy-border);border-right:1px solid var(--navy-border);display:flex;flex-direction:column;justify-content:center;}
-.sbox:nth-child(even){border-right:none;}
-.sbox:nth-last-child(-n+2){border-bottom:none;}
-.sbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
-.sbox-v{font-family:"Rajdhani",sans-serif;font-size:1.45rem;font-weight:700;color:var(--cyan);line-height:1;}
-.sbox-u{font-size:0.6rem;color:var(--muted);margin-top:2px;}
+.hero-stats{width:260px;flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;}
+.sbox{padding:16px 14px;border-bottom:1px solid var(--navy-border);border-right:1px solid var(--navy-border);display:flex;flex-direction:column;justify-content:center;}
+.sbox:nth-child(even){border-right:none;}.sbox:nth-last-child(-n+2){border-bottom:none;}
+.sbox-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
+.sbox-v{font-family:"Rajdhani",sans-serif;font-size:1.35rem;font-weight:700;color:var(--cyan);line-height:1;}
+.sbox-u{font-size:0.58rem;color:var(--muted);margin-top:2px;}
+/* TARGETS */
 .tbar{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:10px 32px;}
 .tbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
 .ti{display:flex;flex-direction:column;gap:1px;}
-.ti-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
-.ti-v{font-family:"Rajdhani",sans-serif;font-size:0.95rem;font-weight:700;color:var(--cyan);}
+.ti-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.ti-v{font-family:"Rajdhani",sans-serif;font-size:0.92rem;font-weight:700;color:var(--cyan);}
 .tdiv{width:1px;height:24px;background:var(--navy-border);}
+/* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:24px 32px;}
-.sec{font-family:"Rajdhani",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.sec{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .sec::after{content:"";flex:1;height:1px;background:var(--navy-border);}
 .today-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
 .today-card{background:var(--navy-card);border:1px solid rgba(0,200,240,0.2);border-radius:13px;padding:16px 18px;}
-.tc-head{font-family:"Rajdhani",sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+.tc-head{font-family:"Rajdhani",sans-serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
 .macro-big{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px;}
 .mb{background:rgba(255,255,255,0.03);border:1px solid var(--navy-border);border-radius:8px;padding:9px 5px;text-align:center;}
 .mb .mv{font-family:"Rajdhani",sans-serif;font-size:1.2rem;font-weight:700;line-height:1;}
@@ -84,7 +80,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .mbp{font-size:0.58rem;color:var(--muted);width:32px;text-align:right;}
 .sleep-today{display:flex;gap:14px;align-items:flex-start;margin-bottom:8px;}
 .sleep-main{flex:1;}
-.slp-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.slp-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
 .slp-d{font-family:"Rajdhani",sans-serif;font-size:1.6rem;font-weight:700;color:var(--cyan);line-height:1;}
 .slp-t{font-size:0.6rem;color:var(--muted);margin-top:2px;}
 .slp-snum{font-family:"Rajdhani",sans-serif;font-size:2rem;font-weight:700;color:var(--amber);line-height:1;text-align:right;}
@@ -96,25 +92,22 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .sbval{font-size:0.58rem;font-weight:600;text-align:center;}
 .sblbl{font-size:0.5rem;color:var(--muted);text-align:center;}
 .slp-meta{display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid rgba(255,255,255,0.04);margin-top:7px;}
-.smeta{font-size:0.58rem;color:var(--muted);}
-.smeta span{color:var(--text);font-weight:600;}
+.smeta{font-size:0.58rem;color:var(--muted);}.smeta span{color:var(--text);font-weight:600;}
 .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
 .sumbox{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;padding:14px 12px;text-align:center;}
-.sumbox-l{font-size:0.58rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
+.sumbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
 .sumbox-v{font-family:"Rajdhani",sans-serif;font-size:1.4rem;font-weight:700;line-height:1;}
 .sumbox-s{font-size:0.6rem;color:var(--muted);margin-top:3px;}
 .cal-wrap{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;overflow:hidden;margin-bottom:28px;}
 .cal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--navy-border);}
 .cal-month{font-family:"Rajdhani",sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:2px;}
-.cal-nav{background:rgba(0,200,240,0.08);border:1px solid rgba(0,200,240,0.18);border-radius:6px;color:var(--cyan);padding:5px 14px;cursor:pointer;font-size:0.75rem;font-family:"Rajdhani",sans-serif;letter-spacing:1px;transition:background 0.15s;}
+.cal-nav{background:rgba(0,200,240,0.08);border:1px solid rgba(0,200,240,0.18);border-radius:6px;color:var(--cyan);padding:5px 14px;cursor:pointer;font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:1px;transition:background 0.15s;}
 .cal-nav:hover{background:rgba(0,200,240,0.18);}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
 .cal-dow{padding:8px 4px;text-align:center;font-size:0.58rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--navy-border);}
 .cal-day{min-height:58px;padding:6px 5px;border-right:1px solid var(--navy-border);border-bottom:1px solid var(--navy-border);position:relative;transition:background 0.15s;}
-.cal-day:nth-child(7n){border-right:none;}
-.cal-day.empty{background:rgba(0,0,0,0.1);}
-.cal-day.has-data{cursor:pointer;}
-.cal-day.has-data:hover{background:rgba(0,200,240,0.08);}
+.cal-day:nth-child(7n){border-right:none;}.cal-day.empty{background:rgba(0,0,0,0.1);}
+.cal-day.has-data{cursor:pointer;}.cal-day.has-data:hover{background:rgba(0,200,240,0.08);}
 .cal-day.is-today{outline:1px solid rgba(0,200,240,0.3);}
 .cd-num{font-size:0.68rem;font-weight:600;color:var(--muted);margin-bottom:3px;}
 .cd-num.logged{color:var(--text);}
@@ -133,7 +126,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .tip.w{border-color:var(--amber);background:rgba(240,168,0,0.04);}
 .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .cc{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;padding:16px;}
-.cc-title{font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+.cc-title{font-family:"Rajdhani",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
 .cw{position:relative;height:160px;}
 .wrow{display:flex;align-items:center;gap:10px;background:rgba(0,232,168,0.04);border:1px solid rgba(0,232,168,0.16);border-radius:8px;padding:9px 12px;margin-top:10px;}
 .wv{font-family:"Rajdhani",sans-serif;font-size:1.2rem;font-weight:700;color:var(--mint);}
@@ -141,7 +134,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .footer{border-top:1px solid var(--navy-border);padding:14px 32px;text-align:center;font-size:0.6rem;color:var(--muted);letter-spacing:1px;margin-top:28px;}
 .footer span{color:var(--cyan);}
 @media(max-width:720px){
-  .hero-inner{flex-direction:column;}
+  .hero-inner{flex-direction:column;height:auto;}
   .hero-photo{width:100%;height:200px;border-right:none;border-bottom:1px solid var(--navy-border);}
   .hero-stats{width:100%;}
   .today-grid,.charts-grid{grid-template-columns:1fr;}
@@ -151,12 +144,10 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 </style>
 </head>
 <body>
-<div style="background:#162030;border-bottom:1px solid #1e3448;padding:9px 32px;">
-  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
-    <div style="font-family:Rajdhani,sans-serif;font-size:0.8rem;letter-spacing:2px;color:#7a9bb5;">PROGRESS TRACKER</div>
-    <a href="/fitness/plan.html" style="display:inline-flex;align-items:center;gap:6px;color:#00c8f0;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:5px 14px;border:1px solid rgba(0,200,240,0.2);border-radius:6px;font-family:Rajdhani,sans-serif;transition:background 0.15s;" onmouseover="this.style.background='rgba(0,200,240,0.08)'" onmouseout="this.style.background='transparent'">
-      Meal Plan & Workout ›
-    </a>
+<div class="topnav">
+  <div class="topnav-inner">
+    <span class="nav-label">Progress Tracker</span>
+    <a class="nav-link" href="/fitness/plan.html">Meal Plan &amp; Workout ›</a>
   </div>
 </div>
 <div class="hero">
@@ -188,16 +179,11 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 </div>
 <div class="tbar">
   <div class="tbar-inner">
-    <div class="ti"><div class="ti-l">Protein</div><div class="ti-v">180g</div></div>
-    <div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Carbs</div><div class="ti-v">290g</div></div>
-    <div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Fat</div><div class="ti-v">86g</div></div>
-    <div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Sleep</div><div class="ti-v">7–8 hrs</div></div>
-    <div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Weight gain</div><div class="ti-v">+0.3 kg/wk</div></div>
-    <div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Protein</div><div class="ti-v">180g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Carbs</div><div class="ti-v">290g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Fat</div><div class="ti-v">86g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Sleep</div><div class="ti-v">7–8 hrs</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Weight gain</div><div class="ti-v">+0.3 kg/wk</div></div><div class="tdiv"></div>
     <div class="ti"><div class="ti-l">Training</div><div class="ti-v">Mon–Sat · 9 AM</div></div>
   </div>
 </div>
@@ -242,15 +228,14 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 function pct(v,t){return Math.min(Math.round(v/t*100),100);}
 function byDate(s){return DATA.find(d=>d.date===s)||null;}
 function stageBars(s){
-  const vals=[s.deepH,s.remH,s.lightH,s.awakeH];
-  const mx=Math.max(...vals);
+  const mx=Math.max(s.deepH,s.remH,s.lightH,s.awakeH);
   const hp=v=>Math.round(v/mx*100);
-  return [["Deep",s.deep,"deepH","#4060c8"],["REM",s.rem,"remH","#8040b0"],
-          ["Light",s.light,"lightH","#2080c0"],["Awake",s.awake,"awakeH","rgba(240,80,112,0.6)"]]
+  return[["Deep",s.deep,"deepH","#4060c8"],["REM",s.rem,"remH","#8040b0"],
+         ["Light",s.light,"lightH","#2080c0"],["Awake",s.awake,"awakeH","rgba(240,80,112,0.6)"]]
     .map(([n,v,k,c])=>`<div class="sbw"><div class="sbtrack"><div class="sbfill" style="height:${hp(s[k])}%;background:${c}"></div></div><div class="sbval" style="color:${c}">${v}</div><div class="sblbl">${n}</div></div>`).join("");
 }
 function macroHTML(d){
-  return `<div class="macro-big">
+  return`<div class="macro-big">
     <div class="mb"><div class="mv c-k">${d.calories.toLocaleString()}</div><div class="ml">kcal</div></div>
     <div class="mb"><div class="mv c-p">${d.protein}g</div><div class="ml">Protein</div></div>
     <div class="mb"><div class="mv c-c">${d.carbs}g</div><div class="ml">Carbs</div></div>
@@ -265,7 +250,7 @@ function macroHTML(d){
   ${pct(d.protein,T.prot)<93?`<div class="tip" style="margin-top:5px">💪 ${T.prot-d.protein}g protein short.</div>`:""}`;
 }
 function sleepHTML(s){
-  return `<div class="sleep-today">
+  return`<div class="sleep-today">
     <div class="sleep-main"><div class="slp-l">Duration</div><div class="slp-d">${s.duration}</div><div class="slp-t">${s.bed} → ${s.wake}</div></div>
     <div><div class="slp-snum">${s.score}</div><div class="slp-slbl">Score</div></div>
   </div>
@@ -276,91 +261,76 @@ function sleepHTML(s){
     <div class="smeta">Awake: <span>${s.awake}</span></div>
   </div>`;
 }
-const latestW=[...DATA].reverse().find(d=>d.weight!==null);
-if(latestW) document.getElementById("heroWeight").textContent=latestW.weight;
+const lW=[...DATA].reverse().find(d=>d.weight!==null);
+if(lW) document.getElementById("heroWeight").textContent=lW.weight;
 document.getElementById("dayNum").textContent=DATA.length+1;
-(function(){
-  const d=DATA[DATA.length-1];
+(()=>{const d=DATA[DATA.length-1];
   document.getElementById("todayLabel").textContent=d.label+" · "+d.workout;
   document.getElementById("todayMacros").innerHTML=macroHTML(d);
-  document.getElementById("todaySleep").innerHTML=sleepHTML(d.sleep);
-})();
-(function(){
-  const n=DATA.length;
-  const avgCal=Math.round(DATA.reduce((a,d)=>a+d.calories,0)/n);
-  const avgProt=Math.round(DATA.reduce((a,d)=>a+d.protein,0)/n);
-  const avgSlp=(DATA.reduce((a,d)=>a+d.sleep.dH,0)/n).toFixed(1);
+  document.getElementById("todaySleep").innerHTML=sleepHTML(d.sleep);})();
+(()=>{const n=DATA.length;
+  const aC=Math.round(DATA.reduce((a,d)=>a+d.calories,0)/n);
+  const aP=Math.round(DATA.reduce((a,d)=>a+d.protein,0)/n);
+  const aS=(DATA.reduce((a,d)=>a+d.sleep.dH,0)/n).toFixed(1);
   const ws=DATA.filter(d=>d.weight!==null).map(d=>d.weight);
-  const wDelta=ws.length>=2?(ws[ws.length-1]-ws[0]).toFixed(1):null;
+  const wD=ws.length>=2?(ws[ws.length-1]-ws[0]).toFixed(1):null;
   document.getElementById("summaryRow").innerHTML=`
-    <div class="sumbox"><div class="sumbox-l">Avg Calories</div><div class="sumbox-v c-k">${avgCal.toLocaleString()}</div><div class="sumbox-s">Target 2,650</div></div>
-    <div class="sumbox"><div class="sumbox-l">Avg Protein</div><div class="sumbox-v c-p">${avgProt}g</div><div class="sumbox-s">Target 180g</div></div>
-    <div class="sumbox"><div class="sumbox-l">Avg Sleep</div><div class="sumbox-v" style="color:var(--cyan)">${avgSlp} hrs</div><div class="sumbox-s">Target 7.5 hrs</div></div>
-    <div class="sumbox"><div class="sumbox-l">Weight Δ</div><div class="sumbox-v" style="color:${wDelta===null?'var(--muted)':wDelta>=0?'var(--mint)':'var(--rose)'}">
-      ${wDelta===null?"—":(wDelta>=0?"+":"")+wDelta+" kg"}</div><div class="sumbox-s">Since Day 1</div></div>`;
-})();
+    <div class="sumbox"><div class="sumbox-l">Avg Calories</div><div class="sumbox-v c-k">${aC.toLocaleString()}</div><div class="sumbox-s">Target 2,650</div></div>
+    <div class="sumbox"><div class="sumbox-l">Avg Protein</div><div class="sumbox-v c-p">${aP}g</div><div class="sumbox-s">Target 180g</div></div>
+    <div class="sumbox"><div class="sumbox-l">Avg Sleep</div><div class="sumbox-v" style="color:var(--cyan)">${aS} hrs</div><div class="sumbox-s">Target 7.5 hrs</div></div>
+    <div class="sumbox"><div class="sumbox-l">Weight Δ</div><div class="sumbox-v" style="color:${wD===null?'var(--muted)':wD>=0?'var(--mint)':'var(--rose)'}">
+      ${wD===null?"—":(wD>=0?"+":"")+wD+" kg"}</div><div class="sumbox-s">Since Day 1</div></div>`;})();
 const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DOWS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 let cY=2025,cM=4;
 function shiftMonth(d){cM+=d;if(cM>11){cM=0;cY++;}if(cM<0){cM=11;cY--;}renderCal();}
 function renderCal(){
   document.getElementById("calLabel").textContent=MONTHS[cM]+" "+cY;
-  const firstDow=new Date(cY,cM,1).getDay();
-  const dim=new Date(cY,cM+1,0).getDate();
-  const today=new Date();
-  let html=DOWS.map(d=>`<div class="cal-dow">${d}</div>`).join("");
-  for(let i=0;i<firstDow;i++) html+=`<div class="cal-day empty"></div>`;
+  const fd=new Date(cY,cM,1).getDay(),dim=new Date(cY,cM+1,0).getDate(),today=new Date();
+  let h=DOWS.map(d=>`<div class="cal-dow">${d}</div>`).join("");
+  for(let i=0;i<fd;i++) h+=`<div class="cal-day empty"></div>`;
   for(let d=1;d<=dim;d++){
     const ds=`${cY}-${String(cM+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
     const e=byDate(ds);
-    const isToday=today.getFullYear()===cY&&today.getMonth()===cM&&today.getDate()===d;
-    let cls="cal-day"+(e?" has-data":"")+(isToday?" is-today":"");
+    const iT=today.getFullYear()===cY&&today.getMonth()===cM&&today.getDate()===d;
+    let cls="cal-day"+(e?" has-data":"")+(iT?" is-today":"");
     let inner=`<div class="cd-num${e?" logged":""}">${d}</div>`;
-    if(e){
-      inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div><div class="cd-slp">${e.sleep.duration}</div>`;
+    if(e){inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div><div class="cd-slp">${e.sleep.duration}</div>`;
       if(e.weight) inner+=`<div class="cd-wt">${e.weight}kg</div>`;
-      html+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
-    } else { html+=`<div class="${cls}">${inner}</div>`; }
+      h+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
+    } else h+=`<div class="${cls}">${inner}</div>`;
   }
-  const rem=(firstDow+dim)%7;
-  if(rem) for(let i=0;i<7-rem;i++) html+=`<div class="cal-day empty"></div>`;
-  document.getElementById("calGrid").innerHTML=html;
+  const rem=(fd+dim)%7; if(rem) for(let i=0;i<7-rem;i++) h+=`<div class="cal-day empty"></div>`;
+  document.getElementById("calGrid").innerHTML=h;
 }
 renderCal();
 function openModal(ds){
   const d=byDate(ds); if(!d) return;
   document.getElementById("modalTitle").textContent=d.day+" · "+d.label;
-  document.getElementById("modalBody").innerHTML=`
-    ${macroHTML(d)}
+  document.getElementById("modalBody").innerHTML=`${macroHTML(d)}
     <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--navy-border)">
       <div style="font-size:0.6rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">Sleep</div>
-      ${sleepHTML(d.sleep)}
-    </div>
-    ${d.weight?`<div class="wrow" style="margin-top:12px"><div><div class="wv">${d.weight} kg</div><div class="wl">Morning Weight</div></div></div>`:`<div class="tip" style="margin-top:10px">⚖️ No weight logged this day.</div>`}
+      ${sleepHTML(d.sleep)}</div>
+    ${d.weight?`<div class="wrow" style="margin-top:12px"><div><div class="wv">${d.weight} kg</div><div class="wl">Morning Weight</div></div></div>`:`<div class="tip" style="margin-top:10px">⚖️ No weight logged.</div>`}
     ${d.workout?`<div class="tip" style="margin-top:7px">🏋️ ${d.workout}</div>`:""}`;
   document.getElementById("overlay").classList.add("open");
 }
 function overlayClick(e){if(e.target===document.getElementById("overlay"))closeModal();}
 function closeModal(){document.getElementById("overlay").classList.remove("open");}
-Chart.defaults.color="#7a9bb5";
-Chart.defaults.borderColor="rgba(30,52,72,0.7)";
-Chart.defaults.font.family="Open Sans, sans-serif";
-Chart.defaults.font.size=11;
+Chart.defaults.color="#7a9bb5";Chart.defaults.borderColor="rgba(30,52,72,0.7)";Chart.defaults.font.family="Open Sans, sans-serif";Chart.defaults.font.size=11;
 const labels=DATA.map(d=>d.label.split(", ")[1]);
 function lds(label,values,color,dashed){
   return{label,data:values,borderColor:color,
     backgroundColor:dashed?"transparent":color.replace(/[\d.]+\)$/,"0.09)").replace("rgb(","rgba("),
-    borderWidth:dashed?1.5:2.5,borderDash:dashed?[5,4]:[],
-    pointRadius:dashed?0:4,pointBackgroundColor:color,fill:!dashed,tension:0.35,spanGaps:true};
-}
-const bOpts=(mn,mx,u)=>({responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{labels:{boxWidth:9,padding:9}}},
+    borderWidth:dashed?1.5:2.5,borderDash:dashed?[5,4]:[],pointRadius:dashed?0:4,
+    pointBackgroundColor:color,fill:!dashed,tension:0.35,spanGaps:true};}
+const bO=(mn,mx,u)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:9}}},
   scales:{y:{min:mn,max:mx,title:{display:!!u,text:u}},x:{grid:{color:"rgba(30,52,72,0.6)"}}}});
-new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",DATA.map(d=>d.calories),"#00c8f0"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(0,232,168,0.6)",true)]},options:bOpts(1500,3000,"kcal")});
-new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein),"#00e8a8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(240,168,0,0.6)",true)]},options:bOpts(100,220,"g")});
+new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",DATA.map(d=>d.calories),"#00c8f0"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(0,232,168,0.6)",true)]},options:bO(1500,3000,"kcal")});
+new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein),"#00e8a8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(240,168,0,0.6)",true)]},options:bO(100,220,"g")});
 new Chart(document.getElementById("cfChart"),{type:"line",data:{labels,datasets:[lds("Carbs",DATA.map(d=>d.carbs),"#f0a800"),lds("Carb Target 290g",Array(DATA.length).fill(290),"rgba(240,168,0,0.4)",true),lds("Fat",DATA.map(d=>d.fat),"#c080ff"),lds("Fat Target 86g",Array(DATA.length).fill(86),"rgba(192,128,255,0.4)",true)]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:7}}},scales:{y:{title:{display:true,text:"g"}}}}});
-new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep.dH),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bOpts(5,9,"hours")});
-new Chart(document.getElementById("wChart"),{type:"line",data:{labels,datasets:[lds("Weight",DATA.map(d=>d.weight),"#00e8a8"),lds("Start 59kg",Array(DATA.length).fill(59),"rgba(240,168,0,0.4)",true)]},options:bOpts(57,62,"kg")});
+new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep.dH),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bO(5,9,"hours")});
+new Chart(document.getElementById("wChart"),{type:"line",data:{labels,datasets:[lds("Weight",DATA.map(d=>d.weight),"#00e8a8"),lds("Start 59kg",Array(DATA.length).fill(59),"rgba(240,168,0,0.4)",true)]},options:bO(57,62,"kg")});
 new Chart(document.getElementById("ssChart"),{type:"line",data:{labels,datasets:[
   {label:"Deep",data:DATA.map(d=>d.sleep.deepH),borderColor:"#4060c8",backgroundColor:"rgba(64,96,200,0.15)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#4060c8"},
   {label:"REM",data:DATA.map(d=>d.sleep.remH),borderColor:"#8040b0",backgroundColor:"rgba(128,64,176,0.1)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#8040b0"},
