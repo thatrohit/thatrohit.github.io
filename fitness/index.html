@@ -7,15 +7,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
+// ════════════════════════════════════════════════════════════════
+//  ★  DAILY DATA — UPDATED AUTOMATICALLY BY CLAUDE  ★
+// ════════════════════════════════════════════════════════════════
 const DATA = [
-  {day:"DAY 1",date:"2025-05-04",label:"Mon, May 4",workout:"Push · Strength",
-   calories:2050,protein:170,carbs:173,fat:45,weight:null,
-   sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
-          deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}},
-  {day:"DAY 2",date:"2025-05-05",label:"Tue, May 5",workout:"Pull · Strength",
-   calories:2476,protein:169,carbs:222,fat:103,weight:58.1,
-   sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
-          deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}},
+  {
+    day:"DAY 1", date:"2025-05-04", label:"Mon, May 4", workout:"Push · Strength",
+    calories:2050, protein:170, carbs:173, fat:45, weight:null,
+    sleep:null
+  },
+  {
+    day:"DAY 2", date:"2025-05-05", label:"Tue, May 5", workout:"Pull · Strength",
+    calories:2476, protein:169, carbs:222, fat:103, weight:58.1,
+    sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
+           deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,
+           deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}
+  },
+  {
+    day:"DAY 3", date:"2025-05-06", label:"Wed, May 6", workout:"Legs",
+    calories:2086, protein:188, carbs:240, fat:47, weight:58.3,
+    sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
+           deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,
+           deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}
+  },
 ];
 const T={cal:2650,prot:180,carbs:290,fat:86,sleep:7.5};
 </script>
@@ -25,13 +39,11 @@ const T={cal:2650,prot:180,carbs:290,fat:86,sleep:7.5};
   --text:#e8f0f8;--muted:#7a9bb5;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif;min-height:100vh;}
-/* NAV */
 .topnav{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:10px 32px;}
 .topnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
 .nav-label{font-family:"Rajdhani",sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
 .nav-link{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);text-decoration:none;padding:6px 16px;border:1px solid rgba(0,200,240,0.25);border-radius:6px;transition:background 0.15s;}
 .nav-link:hover{background:rgba(0,200,240,0.08);}
-/* HERO */
 .hero{background:linear-gradient(135deg,#0a1520 0%,#0d1e2e 50%,#091525 100%);border-bottom:1px solid var(--navy-border);position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,200,240,0.05) 0%,transparent 60%);pointer-events:none;}
 .hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;height:220px;}
@@ -53,14 +65,12 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .sbox-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
 .sbox-v{font-family:"Rajdhani",sans-serif;font-size:1.35rem;font-weight:700;color:var(--cyan);line-height:1;}
 .sbox-u{font-size:0.58rem;color:var(--muted);margin-top:2px;}
-/* TARGETS */
 .tbar{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:10px 32px;}
 .tbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
 .ti{display:flex;flex-direction:column;gap:1px;}
 .ti-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
 .ti-v{font-family:"Rajdhani",sans-serif;font-size:0.92rem;font-weight:700;color:var(--cyan);}
 .tdiv{width:1px;height:24px;background:var(--navy-border);}
-/* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:24px 32px;}
 .sec{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .sec::after{content:"";flex:1;height:1px;background:var(--navy-border);}
@@ -93,6 +103,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .sblbl{font-size:0.5rem;color:var(--muted);text-align:center;}
 .slp-meta{display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid rgba(255,255,255,0.04);margin-top:7px;}
 .smeta{font-size:0.58rem;color:var(--muted);}.smeta span{color:var(--text);font-weight:600;}
+.no-sleep{font-size:0.72rem;color:var(--muted);padding:16px 0;text-align:center;}
 .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
 .sumbox{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;padding:14px 12px;text-align:center;}
 .sumbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
@@ -250,6 +261,7 @@ function macroHTML(d){
   ${pct(d.protein,T.prot)<93?`<div class="tip" style="margin-top:5px">💪 ${T.prot-d.protein}g protein short.</div>`:""}`;
 }
 function sleepHTML(s){
+  if(!s) return `<div class="no-sleep">No sleep data for this day.</div>`;
   return`<div class="sleep-today">
     <div class="sleep-main"><div class="slp-l">Duration</div><div class="slp-d">${s.duration}</div><div class="slp-t">${s.bed} → ${s.wake}</div></div>
     <div><div class="slp-snum">${s.score}</div><div class="slp-slbl">Score</div></div>
@@ -271,7 +283,8 @@ document.getElementById("dayNum").textContent=DATA.length+1;
 (()=>{const n=DATA.length;
   const aC=Math.round(DATA.reduce((a,d)=>a+d.calories,0)/n);
   const aP=Math.round(DATA.reduce((a,d)=>a+d.protein,0)/n);
-  const aS=(DATA.reduce((a,d)=>a+d.sleep.dH,0)/n).toFixed(1);
+  const slpData=DATA.filter(d=>d.sleep);
+  const aS=slpData.length?(slpData.reduce((a,d)=>a+d.sleep.dH,0)/slpData.length).toFixed(1):"—";
   const ws=DATA.filter(d=>d.weight!==null).map(d=>d.weight);
   const wD=ws.length>=2?(ws[ws.length-1]-ws[0]).toFixed(1):null;
   document.getElementById("summaryRow").innerHTML=`
@@ -295,7 +308,7 @@ function renderCal(){
     const iT=today.getFullYear()===cY&&today.getMonth()===cM&&today.getDate()===d;
     let cls="cal-day"+(e?" has-data":"")+(iT?" is-today":"");
     let inner=`<div class="cd-num${e?" logged":""}">${d}</div>`;
-    if(e){inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div><div class="cd-slp">${e.sleep.duration}</div>`;
+    if(e){inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div><div class="cd-slp">${e.sleep?e.sleep.duration:"No sleep data"}</div>`;
       if(e.weight) inner+=`<div class="cd-wt">${e.weight}kg</div>`;
       h+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
     } else h+=`<div class="${cls}">${inner}</div>`;
@@ -329,12 +342,12 @@ const bO=(mn,mx,u)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:
 new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",DATA.map(d=>d.calories),"#00c8f0"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(0,232,168,0.6)",true)]},options:bO(1500,3000,"kcal")});
 new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein),"#00e8a8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(240,168,0,0.6)",true)]},options:bO(100,220,"g")});
 new Chart(document.getElementById("cfChart"),{type:"line",data:{labels,datasets:[lds("Carbs",DATA.map(d=>d.carbs),"#f0a800"),lds("Carb Target 290g",Array(DATA.length).fill(290),"rgba(240,168,0,0.4)",true),lds("Fat",DATA.map(d=>d.fat),"#c080ff"),lds("Fat Target 86g",Array(DATA.length).fill(86),"rgba(192,128,255,0.4)",true)]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:7}}},scales:{y:{title:{display:true,text:"g"}}}}});
-new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep.dH),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bO(5,9,"hours")});
+new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.filter(d=>d.sleep).map(d=>d.sleep.dH),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bO(5,9,"hours")});
 new Chart(document.getElementById("wChart"),{type:"line",data:{labels,datasets:[lds("Weight",DATA.map(d=>d.weight),"#00e8a8"),lds("Start 59kg",Array(DATA.length).fill(59),"rgba(240,168,0,0.4)",true)]},options:bO(57,62,"kg")});
 new Chart(document.getElementById("ssChart"),{type:"line",data:{labels,datasets:[
-  {label:"Deep",data:DATA.map(d=>d.sleep.deepH),borderColor:"#4060c8",backgroundColor:"rgba(64,96,200,0.15)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#4060c8"},
-  {label:"REM",data:DATA.map(d=>d.sleep.remH),borderColor:"#8040b0",backgroundColor:"rgba(128,64,176,0.1)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#8040b0"},
-  {label:"Light",data:DATA.map(d=>d.sleep.lightH),borderColor:"#2080c0",backgroundColor:"rgba(32,128,192,0.08)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#2080c0"}]},
+  {label:"Deep",data:DATA.map(d=>d.sleep?d.sleep.deepH:null),borderColor:"#4060c8",backgroundColor:"rgba(64,96,200,0.15)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#4060c8",spanGaps:true},
+  {label:"REM",data:DATA.map(d=>d.sleep?d.sleep.remH:null),borderColor:"#8040b0",backgroundColor:"rgba(128,64,176,0.1)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#8040b0",spanGaps:true},
+  {label:"Light",data:DATA.map(d=>d.sleep?d.sleep.lightH:null),borderColor:"#2080c0",backgroundColor:"rgba(32,128,192,0.08)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#2080c0",spanGaps:true}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:8}}},scales:{y:{min:0,max:6,title:{display:true,text:"hours"}}}}});
 </script>
 </body>
