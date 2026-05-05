@@ -6,148 +6,129 @@
 <title>Rohit — Lean Bulk Program</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0f1923;--navy-mid:#162030;--navy-card:#1a2a3a;--navy-border:#1e3448;
+:root{--navy:#0f1923;--navy-mid:#162030;--navy-card:#1a2a3a;--navy-border:#1e3448;
   --cyan:#00c8f0;--mint:#00e8a8;--amber:#f0a800;--rose:#f05070;--purple:#c080ff;
-  --text:#e8f0f8;--muted:#7a9bb5;
-}
+  --text:#e8f0f8;--muted:#7a9bb5;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif;min-height:100vh;}
-
-/* NAV */
+/* NAV — same style as tracker */
 .topnav{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:10px 32px;}
-.topnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;}
-.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--cyan);font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:5px 12px;border:1px solid rgba(0,200,240,0.2);border-radius:6px;transition:background 0.15s;}
-.back-link:hover{background:rgba(0,200,240,0.08);}
-.nav-title{font-family:"Rajdhani",sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--muted);}
-
-/* HERO */
+.topnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-label{font-family:"Rajdhani",sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.nav-link{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);text-decoration:none;padding:6px 16px;border:1px solid rgba(0,200,240,0.25);border-radius:6px;transition:background 0.15s;}
+.nav-link:hover{background:rgba(0,200,240,0.08);}
+/* HERO — fixed height matching tracker */
 .hero{background:linear-gradient(135deg,#0a1520 0%,#0d1e2e 50%,#091525 100%);border-bottom:1px solid var(--navy-border);position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,200,240,0.05) 0%,transparent 60%);pointer-events:none;}
-.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;min-height:200px;}
-.hero-photo{width:160px;flex-shrink:0;position:relative;overflow:hidden;border-right:1px solid var(--navy-border);}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;height:220px;}
+.hero-photo{width:165px;flex-shrink:0;position:relative;overflow:hidden;border-right:1px solid var(--navy-border);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
 .photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(9,21,37,0.92));padding:18px 10px 8px;text-align:center;}
 .photo-label .at{font-size:0.56rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
 .photo-label .an{font-family:"Rajdhani",sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:3px;color:var(--cyan);line-height:1;}
-.hero-center{flex:1;padding:26px 28px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--navy-border);}
+.hero-center{flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--navy-border);}
 .hero-tag{font-size:0.6rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;}
-.hero-name{font-family:"Rajdhani",sans-serif;font-size:2.8rem;font-weight:700;letter-spacing:5px;color:var(--text);line-height:1;margin-bottom:5px;}
-.hero-sub{font-size:0.68rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.hero-name{font-family:"Rajdhani",sans-serif;font-size:2.6rem;font-weight:700;letter-spacing:5px;color:var(--text);line-height:1;margin-bottom:5px;}
+.hero-sub{font-size:0.66rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
 .hbadges{display:flex;gap:7px;flex-wrap:wrap;}
 .hb{background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.16);border-radius:20px;padding:3px 10px;font-size:0.64rem;color:var(--muted);}
 .hb span{color:var(--cyan);font-weight:600;}
-.hero-stats{width:270px;flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;}
-.sbox{padding:18px 14px;border-bottom:1px solid var(--navy-border);border-right:1px solid var(--navy-border);display:flex;flex-direction:column;justify-content:center;}
-.sbox:nth-child(even){border-right:none;}
-.sbox:nth-last-child(-n+2){border-bottom:none;}
-.sbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
-.sbox-v{font-family:"Rajdhani",sans-serif;font-size:1.45rem;font-weight:700;color:var(--cyan);line-height:1;}
-.sbox-u{font-size:0.6rem;color:var(--muted);margin-top:2px;}
-
-/* TABS */
-.tabs-bar{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:0 32px;}
-.tabs-inner{max-width:1100px;margin:0 auto;display:flex;gap:0;}
-.tab{padding:14px 24px;font-family:"Rajdhani",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;}
+.hero-stats{width:260px;flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;}
+.sbox{padding:16px 14px;border-bottom:1px solid var(--navy-border);border-right:1px solid var(--navy-border);display:flex;flex-direction:column;justify-content:center;}
+.sbox:nth-child(even){border-right:none;}.sbox:nth-last-child(-n+2){border-bottom:none;}
+.sbox-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
+.sbox-v{font-family:"Rajdhani",sans-serif;font-size:1.35rem;font-weight:700;color:var(--cyan);line-height:1;}
+.sbox-u{font-size:0.58rem;color:var(--muted);margin-top:2px;}
+/* TABS — evenly spaced, same font as nav */
+.tabs-bar{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);}
+.tabs-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);}
+.tab{padding:14px 16px;font-family:"Rajdhani",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;text-align:center;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--cyan);border-bottom-color:var(--cyan);}
-
 /* MAIN */
-.main{max-width:1100px;margin:0 auto;padding:28px 32px;}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-.sec{font-family:"Rajdhani",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.main{max-width:1100px;margin:0 auto;padding:24px 32px;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.sec{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .sec::after{content:"";flex:1;height:1px;background:var(--navy-border);}
-
 /* MACROS */
-.macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
+.macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
 .macro-card{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;padding:20px;text-align:center;}
-.macro-val{font-family:"Rajdhani",sans-serif;font-size:2.5rem;font-weight:700;line-height:1;margin-bottom:4px;}
-.macro-lbl{font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
-.macro-sub{font-size:0.65rem;color:var(--muted);}
-.why-box{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;padding:20px;margin-bottom:28px;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.macro-val{font-family:"Rajdhani",sans-serif;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:4px;}
+.macro-lbl{font-size:0.63rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.macro-sub{font-size:0.63rem;color:var(--muted);}
+.why-box{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;padding:18px;margin-bottom:24px;font-size:0.8rem;color:var(--muted);line-height:1.7;}
 .why-box strong{color:var(--text);}
-
 /* SUPPLEMENTS */
-.supp-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
-.supp-item{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:11px;padding:16px 18px;display:flex;gap:16px;align-items:flex-start;}
-.supp-time{font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:1px;color:var(--cyan);white-space:nowrap;min-width:120px;padding-top:2px;}
-.supp-body{}
-.supp-title{font-family:"Rajdhani",sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
-.supp-desc{font-size:0.72rem;color:var(--muted);line-height:1.6;}
-.supp-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.stag{background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.15);border-radius:20px;padding:2px 9px;font-size:0.6rem;color:var(--cyan);}
+.supp-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.supp-item{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;padding:14px 16px;display:flex;gap:16px;align-items:flex-start;}
+.supp-time{font-family:"Rajdhani",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:1px;color:var(--cyan);white-space:nowrap;min-width:130px;padding-top:2px;}
+.supp-title{font-family:"Rajdhani",sans-serif;font-size:0.95rem;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
+.supp-desc{font-size:0.7rem;color:var(--muted);line-height:1.6;}
+.supp-tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;}
+.stag{background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.15);border-radius:20px;padding:2px 9px;font-size:0.58rem;color:var(--cyan);}
 .stag.amber{background:rgba(240,168,0,0.07);border-color:rgba(240,168,0,0.2);color:var(--amber);}
 .stag.mint{background:rgba(0,232,168,0.07);border-color:rgba(0,232,168,0.2);color:var(--mint);}
-
 /* PRINCIPLES */
-.principles{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
-.principle{background:var(--navy-card);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:12px 16px;font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.principles{display:flex;flex-direction:column;gap:7px;margin-bottom:24px;}
+.principle{background:var(--navy-card);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:11px 14px;font-size:0.76rem;color:var(--muted);line-height:1.6;}
 .principle strong{color:var(--text);}
 .principle.amber{border-color:var(--amber);}
 .principle.mint{border-color:var(--mint);}
-
 /* WORKOUT */
-.days-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
-.day-btn{padding:7px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--navy-border);border-radius:7px;font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:1px;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.days-tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px;}
+.day-btn{padding:8px 4px;background:rgba(255,255,255,0.03);border:1px solid var(--navy-border);border-radius:7px;font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:1px;color:var(--muted);cursor:pointer;transition:all 0.15s;text-align:center;}
 .day-btn:hover{border-color:rgba(0,200,240,0.3);color:var(--text);}
 .day-btn.active{background:rgba(0,200,240,0.1);border-color:rgba(0,200,240,0.35);color:var(--cyan);}
 .day-btn.rest{border-color:rgba(240,168,0,0.2);color:var(--amber);}
 .workout-card{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:13px;overflow:hidden;margin-bottom:20px;}
-.wc-head{padding:16px 20px;border-bottom:1px solid var(--navy-border);display:flex;justify-content:space-between;align-items:center;}
-.wc-day{font-family:"Rajdhani",sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:2px;}
-.wc-focus{font-size:0.65rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.wc-head{padding:14px 18px;border-bottom:1px solid var(--navy-border);}
+.wc-day{font-family:"Rajdhani",sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:2px;}
+.wc-focus{font-size:0.63rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 .exercise-table{width:100%;border-collapse:collapse;}
-.exercise-table th{padding:10px 16px;text-align:left;font-size:0.6rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--navy-border);font-weight:600;}
-.exercise-table td{padding:11px 16px;font-size:0.78rem;border-bottom:1px solid rgba(30,52,72,0.5);}
+.exercise-table th{padding:9px 16px;text-align:left;font-size:0.58rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--navy-border);font-weight:600;}
+.exercise-table td{padding:10px 16px;font-size:0.76rem;border-bottom:1px solid rgba(30,52,72,0.5);}
 .exercise-table tr:last-child td{border-bottom:none;}
 .exercise-table tr:hover td{background:rgba(0,200,240,0.03);}
 .sets-badge{display:inline-block;background:rgba(0,200,240,0.08);border:1px solid rgba(0,200,240,0.18);border-radius:4px;padding:1px 7px;font-family:"Rajdhani",sans-serif;font-size:0.75rem;font-weight:700;color:var(--cyan);}
-.focus-badge{font-size:0.65rem;color:var(--muted);}
+.focus-badge{font-size:0.63rem;color:var(--muted);}
 .rest-card{background:var(--navy-card);border:1px solid rgba(240,168,0,0.2);border-radius:13px;padding:32px;text-align:center;margin-bottom:20px;}
 .rest-icon{font-size:2rem;margin-bottom:8px;}
 .rest-title{font-family:"Rajdhani",sans-serif;font-size:1.4rem;font-weight:700;letter-spacing:2px;color:var(--amber);margin-bottom:8px;}
-.rest-desc{font-size:0.78rem;color:var(--muted);line-height:1.7;}
-.training-notes{display:flex;flex-direction:column;gap:8px;}
-
-/* MEAL PLAN */
-.meals-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
-.meal-card{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:11px;overflow:hidden;}
-.meal-head{padding:12px 18px;border-bottom:1px solid var(--navy-border);display:flex;justify-content:space-between;align-items:center;}
-.meal-time-label{font-family:"Rajdhani",sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:1px;}
-.meal-kcal{font-size:0.65rem;color:var(--muted);}
-.meal-time-tag{font-size:0.6rem;color:var(--cyan);letter-spacing:1px;}
-.meal-items{padding:12px 18px;display:flex;flex-direction:column;gap:7px;}
-.meal-item{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;}
+.rest-desc{font-size:0.76rem;color:var(--muted);line-height:1.7;}
+.training-notes{display:flex;flex-direction:column;gap:7px;}
+/* MEALS */
+.meals-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.meal-card{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;overflow:hidden;}
+.meal-head{padding:11px 16px;border-bottom:1px solid var(--navy-border);display:flex;justify-content:space-between;align-items:center;}
+.meal-time-label{font-family:"Rajdhani",sans-serif;font-size:0.88rem;font-weight:700;letter-spacing:1px;}
+.meal-kcal{font-size:0.63rem;color:var(--muted);}
+.meal-time-tag{font-size:0.58rem;color:var(--cyan);letter-spacing:1px;}
+.meal-items{padding:10px 16px;display:flex;flex-direction:column;gap:6px;}
+.meal-item{display:flex;justify-content:space-between;align-items:center;font-size:0.73rem;}
 .meal-item-name{color:var(--text);}
-.meal-item-macros{font-size:0.65rem;color:var(--muted);text-align:right;}
-.diet-tips{display:flex;flex-direction:column;gap:8px;}
-.diet-tip{background:var(--navy-card);border-left:3px solid var(--mint);border-radius:0 8px 8px 0;padding:10px 14px;font-size:0.75rem;color:var(--muted);line-height:1.6;}
-
+.meal-item-macros{font-size:0.63rem;color:var(--muted);text-align:right;margin-left:8px;flex-shrink:0;}
+.diet-tips{display:flex;flex-direction:column;gap:7px;}
+.diet-tip{background:var(--navy-card);border-left:3px solid var(--mint);border-radius:0 8px 8px 0;padding:9px 13px;font-size:0.73rem;color:var(--muted);line-height:1.6;}
 .footer{border-top:1px solid var(--navy-border);padding:14px 32px;text-align:center;font-size:0.6rem;color:var(--muted);letter-spacing:1px;margin-top:28px;}
 .footer span{color:var(--cyan);}
-
 @media(max-width:720px){
-  .hero-inner{flex-direction:column;}
-  .hero-photo{width:100%;height:180px;border-right:none;border-bottom:1px solid var(--navy-border);}
+  .hero-inner{flex-direction:column;height:auto;}
+  .hero-photo{width:100%;height:200px;border-right:none;border-bottom:1px solid var(--navy-border);}
   .hero-stats{width:100%;}
   .macro-grid{grid-template-columns:1fr;}
-  .supp-item{flex-direction:column;gap:8px;}
+  .supp-item{flex-direction:column;gap:6px;}
   .supp-time{min-width:unset;}
+  .days-tabs{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <div class="topnav">
   <div class="topnav-inner">
-    <a class="back-link" href="/fitness/index.html">← Progress Tracker</a>
-    <div class="nav-title">Lean Bulk Program</div>
+    <a class="nav-link" href="/fitness/index.html">← Progress Tracker</a>
+    <span class="nav-label">Lean Bulk Program</span>
   </div>
 </div>
-
-<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-photo">
@@ -174,98 +155,42 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
     </div>
   </div>
 </div>
-
-<!-- TABS -->
 <div class="tabs-bar">
   <div class="tabs-inner">
-    <div class="tab active" onclick="switchTab('macros')">Calories & Macros</div>
+    <div class="tab active" onclick="switchTab('macros')">Calories &amp; Macros</div>
     <div class="tab" onclick="switchTab('workout')">Workout</div>
     <div class="tab" onclick="switchTab('diet')">Diet Plan</div>
   </div>
 </div>
-
 <div class="main">
-
-  <!-- TAB: MACROS -->
+  <!-- MACROS TAB -->
   <div class="tab-content active" id="tab-macros">
     <div class="sec">Daily Targets</div>
     <div class="macro-grid">
-      <div class="macro-card">
-        <div class="macro-val" style="color:var(--cyan)">2,650</div>
-        <div class="macro-lbl">Calories</div>
-        <div class="macro-sub">~250 kcal surplus over TDEE of ~2,400</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-val" style="color:var(--mint)">180g</div>
-        <div class="macro-lbl">Protein</div>
-        <div class="macro-sub">720 kcal · ~3g/kg LBM · non-negotiable</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-val" style="color:var(--amber)">290g</div>
-        <div class="macro-lbl">Carbs</div>
-        <div class="macro-sub">1,160 kcal · fuel + recovery</div>
-      </div>
+      <div class="macro-card"><div class="macro-val" style="color:var(--cyan)">2,650</div><div class="macro-lbl">Calories</div><div class="macro-sub">~250 kcal surplus over TDEE of ~2,400</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:var(--mint)">180g</div><div class="macro-lbl">Protein</div><div class="macro-sub">720 kcal · ~3g/kg LBM · non-negotiable</div></div>
+      <div class="macro-card"><div class="macro-val" style="color:var(--amber)">290g</div><div class="macro-lbl">Carbs</div><div class="macro-sub">1,160 kcal · fuel + recovery</div></div>
     </div>
-    <div class="why-box">
-      <strong>Why 2,650 kcal?</strong> At 59 kg with 20% body fat you're lean enough to bulk cleanly. A modest 250 kcal surplus adds muscle with minimal fat gain. Hit protein first every single day — carbs and fats are flexible around it. If the scale doesn't move for 2 weeks, add 100–150 kcal via rice or oats.
-    </div>
-
+    <div class="why-box"><strong>Why 2,650 kcal?</strong> At 59 kg with 20% body fat you're lean enough to bulk cleanly. A modest 250 kcal surplus adds muscle with minimal fat gain. Hit protein first every single day — carbs and fats are flexible around it. If the scale doesn't move for 2 weeks, add 100–150 kcal via rice or oats.</div>
     <div class="sec">Supplement & Routine Schedule</div>
     <div class="supp-list">
-      <div class="supp-item">
-        <div class="supp-time">~7:00 AM · Wake Up</div>
-        <div class="supp-body">
-          <div class="supp-title">Iron Supplement + Coffee</div>
-          <div class="supp-desc">Take iron first on an empty stomach. Wait 15–20 min, then have coffee with 40ml toned milk. Calcium in 40ml has minimal impact on iron absorption — just don't stack a full dairy meal right after.</div>
-          <div class="supp-tags"><span class="stag">Iron first</span><span class="stag amber">Empty stomach</span><span class="stag">40ml toned milk</span></div>
-        </div>
-      </div>
-      <div class="supp-item">
-        <div class="supp-time">9:00–10:00 AM · Gym</div>
-        <div class="supp-body">
-          <div class="supp-title">Fasted Training</div>
-          <div class="supp-desc">Training fasted at your body composition is completely fine. Coffee gives you the caffeine boost you need. Sip water throughout your session.</div>
-          <div class="supp-tags"><span class="stag mint">Fasted · No issues</span></div>
-        </div>
-      </div>
-      <div class="supp-item">
-        <div class="supp-time">10:15–10:30 AM · Post-Workout</div>
-        <div class="supp-body">
-          <div class="supp-title">Whey + Collagen + Multivitamin</div>
-          <div class="supp-desc">Mix 1 scoop whey + 1 scoop collagen in water. Take multivitamin with this meal — fat-soluble vitamins (A, D, E, K) absorb better with food. Follow with eggs + oats. Most important meal of the day.</div>
-          <div class="supp-tags"><span class="stag">Whey 1 scoop</span><span class="stag">Collagen 1 scoop</span><span class="stag amber">Multivitamin</span></div>
-        </div>
-      </div>
-      <div class="supp-item">
-        <div class="supp-time">5:00–6:00 PM · Evening</div>
-        <div class="supp-body">
-          <div class="supp-title">Second Coffee</div>
-          <div class="supp-desc">Second daily coffee with 40ml toned milk + monk fruit. No later than 6 PM — caffeine this late affects sleep quality.</div>
-          <div class="supp-tags"><span class="stag">40ml toned milk</span><span class="stag amber">No later than 6 PM</span></div>
-        </div>
-      </div>
-      <div class="supp-item">
-        <div class="supp-time">10:30–11:00 PM · Bedtime</div>
-        <div class="supp-body">
-          <div class="supp-title">Tretinoin Application</div>
-          <div class="supp-desc">Wash face, pat completely dry, wait 20–30 min, then apply a pea-sized amount. Moisturise 10–15 min later. SPF every morning without fail — tretinoin increases UV sensitivity significantly.</div>
-          <div class="supp-tags"><span class="stag">Dry skin only</span><span class="stag">Moisturise after</span><span class="stag amber">SPF every morning</span></div>
-        </div>
-      </div>
+      <div class="supp-item"><div class="supp-time">~7:00 AM · Wake Up</div><div><div class="supp-title">Iron Supplement + Coffee</div><div class="supp-desc">Take iron first on an empty stomach. Wait 15–20 min, then have coffee with 40ml toned milk + monk fruit. Calcium in 40ml has minimal impact on iron absorption.</div><div class="supp-tags"><span class="stag">Iron first</span><span class="stag amber">Empty stomach</span><span class="stag">40ml toned milk</span></div></div></div>
+      <div class="supp-item"><div class="supp-time">9:00–10:00 AM · Gym</div><div><div class="supp-title">Fasted Training</div><div class="supp-desc">Training fasted at your body composition is completely fine. Coffee gives you the caffeine boost. Sip water throughout.</div><div class="supp-tags"><span class="stag mint">Fasted · No issues</span></div></div></div>
+      <div class="supp-item"><div class="supp-time">10:15–10:30 AM</div><div><div class="supp-title">Whey + Collagen + Multivitamin</div><div class="supp-desc">Mix 1 scoop whey + 1 scoop collagen in water. Take multivitamin with this meal — fat-soluble vitamins absorb better with food. Most important meal of the day.</div><div class="supp-tags"><span class="stag">Whey 1 scoop</span><span class="stag">Collagen 1 scoop</span><span class="stag amber">Multivitamin</span></div></div></div>
+      <div class="supp-item"><div class="supp-time">5:00–6:00 PM · Evening</div><div><div class="supp-title">Second Coffee</div><div class="supp-desc">40ml toned milk + monk fruit. No later than 6 PM — caffeine this late affects sleep quality.</div><div class="supp-tags"><span class="stag">40ml toned milk</span><span class="stag amber">No later than 6 PM</span></div></div></div>
+      <div class="supp-item"><div class="supp-time">10:30–11:00 PM · Bed</div><div><div class="supp-title">Tretinoin Application</div><div class="supp-desc">Wash face, pat completely dry, wait 20–30 min, apply pea-sized amount. Moisturise 10–15 min later. SPF every morning without fail.</div><div class="supp-tags"><span class="stag">Dry skin only</span><span class="stag">Moisturise after</span><span class="stag amber">SPF every morning</span></div></div></div>
     </div>
-
     <div class="sec">Key Principles</div>
     <div class="principles">
-      <div class="principle"><strong>Hit protein first every day</strong> — non-negotiable. 180g minimum. Carbs and fats are flexible around it.</div>
-      <div class="principle amber"><strong>Iron and calcium don't mix.</strong> Space iron supplement (morning) at least 2 hours from curd, paneer, and milk.</div>
-      <div class="principle"><strong>Collagen needs Vitamin C.</strong> Your multivitamin covers this — adding lime or amla to a meal helps too.</div>
-      <div class="principle mint"><strong>Weigh every morning</strong> after the bathroom. Average over 7 days. Target +0.2–0.4 kg/week.</div>
-      <div class="principle"><strong>No creatine</strong> — caused hair fall previously. Progressive overload + sleep + protein will drive growth.</div>
-      <div class="principle amber"><strong>Sleep 7–8 hours.</strong> At 38 this is as important as the workout itself. Growth hormone peaks in deep sleep.</div>
+      <div class="principle"><strong>Hit protein first every day</strong> — non-negotiable. 180g minimum. Carbs and fats are flexible.</div>
+      <div class="principle amber"><strong>Iron and calcium don't mix.</strong> Space iron supplement at least 2 hours from curd, paneer, and milk.</div>
+      <div class="principle"><strong>Collagen needs Vitamin C.</strong> Multivitamin covers this — lime or amla helps too.</div>
+      <div class="principle mint"><strong>Weigh every morning</strong> after the bathroom. Target +0.2–0.4 kg/week.</div>
+      <div class="principle"><strong>No creatine</strong> — caused hair fall. Progressive overload + sleep + protein drives growth.</div>
+      <div class="principle amber"><strong>Sleep 7–8 hours.</strong> At 38 this is as important as the workout. Growth hormone peaks in deep sleep.</div>
     </div>
   </div>
-
-  <!-- TAB: WORKOUT -->
+  <!-- WORKOUT TAB -->
   <div class="tab-content" id="tab-workout">
     <div class="sec">PPL × 2 Split — Mon to Sat</div>
     <div class="days-tabs">
@@ -277,222 +202,53 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
       <div class="day-btn" onclick="switchDay('sat')">SAT</div>
       <div class="day-btn rest" onclick="switchDay('sun')">SUN</div>
     </div>
-
-    <div id="day-mon" class="day-panel">
-      <div class="workout-card">
-        <div class="wc-head">
-          <div><div class="wc-day">MONDAY · PUSH</div><div class="wc-focus">Chest · Shoulders · Triceps · Strength Focus</div></div>
-        </div>
-        <table class="exercise-table">
-          <tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr>
-          <tr><td>Barbell Bench Press</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Strength</td></tr>
-          <tr><td>Incline Dumbbell Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Upper Chest</td></tr>
-          <tr><td>Cable Chest Fly</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Stretch</td></tr>
-          <tr><td>Overhead Press (BB)</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Strength</td></tr>
-          <tr><td>Lateral Raise</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Width</td></tr>
-          <tr><td>Tricep Rope Pushdown</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Isolation</td></tr>
-          <tr><td>Overhead Tricep Extension</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Long Head</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div id="day-tue" class="day-panel" style="display:none">
-      <div class="workout-card">
-        <div class="wc-head">
-          <div><div class="wc-day">TUESDAY · PULL</div><div class="wc-focus">Back · Biceps · Rear Delts · Strength Focus</div></div>
-        </div>
-        <table class="exercise-table">
-          <tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr>
-          <tr><td>Deadlift</td><td><span class="sets-badge">4</span></td><td>5</td><td class="focus-badge">Compound</td></tr>
-          <tr><td>Barbell Row</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Thickness</td></tr>
-          <tr><td>Pull-ups / Lat Pulldown</td><td><span class="sets-badge">3</span></td><td>8–10</td><td class="focus-badge">Width</td></tr>
-          <tr><td>Seated Cable Row</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Mid Back</td></tr>
-          <tr><td>Face Pulls</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Rear Delt</td></tr>
-          <tr><td>Dumbbell Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Bicep Peak</td></tr>
-          <tr><td>Hammer Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Brachialis</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div id="day-wed" class="day-panel" style="display:none">
-      <div class="workout-card">
-        <div class="wc-head">
-          <div><div class="wc-day">WEDNESDAY · LEGS</div><div class="wc-focus">Quads · Hamstrings · Glutes · Calves</div></div>
-        </div>
-        <table class="exercise-table">
-          <tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr>
-          <tr><td>Back Squat</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Compound</td></tr>
-          <tr><td>Romanian Deadlift</td><td><span class="sets-badge">3</span></td><td>8–10</td><td class="focus-badge">Hamstrings</td></tr>
-          <tr><td>Leg Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Volume</td></tr>
-          <tr><td>Walking Lunges</td><td><span class="sets-badge">3</span></td><td>12/leg</td><td class="focus-badge">Unilateral</td></tr>
-          <tr><td>Leg Curl (Machine)</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Isolation</td></tr>
-          <tr><td>Standing Calf Raise</td><td><span class="sets-badge">4</span></td><td>15–20</td><td class="focus-badge">Calves</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div id="day-thu" class="day-panel" style="display:none">
-      <div class="rest-card">
-        <div class="rest-icon">🛋️</div>
-        <div class="rest-title">REST / Active Recovery</div>
-        <div class="rest-desc">Walk, stretch, foam roll. This is when muscle is actually built — don't skip rest. Keep protein high even on rest days.</div>
-      </div>
-    </div>
-
-    <div id="day-fri" class="day-panel" style="display:none">
-      <div class="workout-card">
-        <div class="wc-head">
-          <div><div class="wc-day">FRIDAY · PUSH</div><div class="wc-focus">Chest · Shoulders · Triceps · Hypertrophy Focus</div></div>
-        </div>
-        <table class="exercise-table">
-          <tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr>
-          <tr><td>Dumbbell Bench Press</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Hypertrophy</td></tr>
-          <tr><td>Cable Crossover</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Chest</td></tr>
-          <tr><td>Machine Shoulder Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Shoulders</td></tr>
-          <tr><td>DB Lateral Raise</td><td><span class="sets-badge">4</span></td><td>15–20</td><td class="focus-badge">Width</td></tr>
-          <tr><td>Close-Grip Bench</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Triceps</td></tr>
-          <tr><td>Skull Crushers</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Long Head</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div id="day-sat" class="day-panel" style="display:none">
-      <div class="workout-card">
-        <div class="wc-head">
-          <div><div class="wc-day">SATURDAY · PULL</div><div class="wc-focus">Back · Biceps · Rear Delts · Hypertrophy Focus</div></div>
-        </div>
-        <table class="exercise-table">
-          <tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr>
-          <tr><td>Chest-Supported Row</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Mid Back</td></tr>
-          <tr><td>Wide Grip Pulldown</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Lats</td></tr>
-          <tr><td>Single-Arm DB Row</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Unilateral</td></tr>
-          <tr><td>Rear Delt Fly (DB)</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Rear Delt</td></tr>
-          <tr><td>Incline Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Stretch</td></tr>
-          <tr><td>Reverse Curl</td><td><span class="sets-badge">2</span></td><td>12–15</td><td class="focus-badge">Brachialis</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div id="day-sun" class="day-panel" style="display:none">
-      <div class="rest-card">
-        <div class="rest-icon">🔒</div>
-        <div class="rest-title">REST — Gym Closed</div>
-        <div class="rest-desc">Full rest day. Eat at target calories, prioritise sleep. No training.</div>
-      </div>
-    </div>
-
-    <div class="sec" style="margin-top:24px">Training Notes</div>
+    <div id="day-mon"><div class="workout-card"><div class="wc-head"><div class="wc-day">MONDAY · PUSH</div><div class="wc-focus">Chest · Shoulders · Triceps · Strength Focus</div></div><table class="exercise-table"><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr><tr><td>Barbell Bench Press</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Strength</td></tr><tr><td>Incline Dumbbell Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Upper Chest</td></tr><tr><td>Cable Chest Fly</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Stretch</td></tr><tr><td>Overhead Press (BB)</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Strength</td></tr><tr><td>Lateral Raise</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Width</td></tr><tr><td>Tricep Rope Pushdown</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Isolation</td></tr><tr><td>Overhead Tricep Extension</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Long Head</td></tr></table></div></div>
+    <div id="day-tue" style="display:none"><div class="workout-card"><div class="wc-head"><div class="wc-day">TUESDAY · PULL</div><div class="wc-focus">Back · Biceps · Rear Delts · Strength Focus</div></div><table class="exercise-table"><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr><tr><td>Deadlift</td><td><span class="sets-badge">4</span></td><td>5</td><td class="focus-badge">Compound</td></tr><tr><td>Barbell Row</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Thickness</td></tr><tr><td>Pull-ups / Lat Pulldown</td><td><span class="sets-badge">3</span></td><td>8–10</td><td class="focus-badge">Width</td></tr><tr><td>Seated Cable Row</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Mid Back</td></tr><tr><td>Face Pulls</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Rear Delt</td></tr><tr><td>Dumbbell Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Bicep Peak</td></tr><tr><td>Hammer Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Brachialis</td></tr></table></div></div>
+    <div id="day-wed" style="display:none"><div class="workout-card"><div class="wc-head"><div class="wc-day">WEDNESDAY · LEGS</div><div class="wc-focus">Quads · Hamstrings · Glutes · Calves</div></div><table class="exercise-table"><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr><tr><td>Back Squat</td><td><span class="sets-badge">4</span></td><td>6–8</td><td class="focus-badge">Compound</td></tr><tr><td>Romanian Deadlift</td><td><span class="sets-badge">3</span></td><td>8–10</td><td class="focus-badge">Hamstrings</td></tr><tr><td>Leg Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Volume</td></tr><tr><td>Walking Lunges</td><td><span class="sets-badge">3</span></td><td>12/leg</td><td class="focus-badge">Unilateral</td></tr><tr><td>Leg Curl (Machine)</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Isolation</td></tr><tr><td>Standing Calf Raise</td><td><span class="sets-badge">4</span></td><td>15–20</td><td class="focus-badge">Calves</td></tr></table></div></div>
+    <div id="day-thu" style="display:none"><div class="rest-card"><div class="rest-icon">🛋️</div><div class="rest-title">REST / Active Recovery</div><div class="rest-desc">Walk, stretch, foam roll. This is when muscle is actually built. Keep protein high even on rest days.</div></div></div>
+    <div id="day-fri" style="display:none"><div class="workout-card"><div class="wc-head"><div class="wc-day">FRIDAY · PUSH</div><div class="wc-focus">Chest · Shoulders · Triceps · Hypertrophy Focus</div></div><table class="exercise-table"><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr><tr><td>Dumbbell Bench Press</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Hypertrophy</td></tr><tr><td>Cable Crossover</td><td><span class="sets-badge">3</span></td><td>12–15</td><td class="focus-badge">Chest</td></tr><tr><td>Machine Shoulder Press</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Shoulders</td></tr><tr><td>DB Lateral Raise</td><td><span class="sets-badge">4</span></td><td>15–20</td><td class="focus-badge">Width</td></tr><tr><td>Close-Grip Bench</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Triceps</td></tr><tr><td>Skull Crushers</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Long Head</td></tr></table></div></div>
+    <div id="day-sat" style="display:none"><div class="workout-card"><div class="wc-head"><div class="wc-day">SATURDAY · PULL</div><div class="wc-focus">Back · Biceps · Rear Delts · Hypertrophy Focus</div></div><table class="exercise-table"><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Focus</th></tr><tr><td>Chest-Supported Row</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Mid Back</td></tr><tr><td>Wide Grip Pulldown</td><td><span class="sets-badge">4</span></td><td>10–12</td><td class="focus-badge">Lats</td></tr><tr><td>Single-Arm DB Row</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Unilateral</td></tr><tr><td>Rear Delt Fly (DB)</td><td><span class="sets-badge">3</span></td><td>15–20</td><td class="focus-badge">Rear Delt</td></tr><tr><td>Incline Curl</td><td><span class="sets-badge">3</span></td><td>10–12</td><td class="focus-badge">Stretch</td></tr><tr><td>Reverse Curl</td><td><span class="sets-badge">2</span></td><td>12–15</td><td class="focus-badge">Brachialis</td></tr></table></div></div>
+    <div id="day-sun" style="display:none"><div class="rest-card"><div class="rest-icon">🔒</div><div class="rest-title">REST — Gym Closed</div><div class="rest-desc">Full rest day. Eat at target calories, prioritise sleep. No training.</div></div></div>
+    <div class="sec" style="margin-top:20px">Training Notes</div>
     <div class="training-notes">
-      <div class="principle">Train <strong>9–10 AM fasted.</strong> Coffee with 40ml toned milk at 7 AM is all you need. No food required before training.</div>
-      <div class="principle mint"><strong>Week 1–2:</strong> learn the movements. <strong>Week 3 onwards:</strong> add weight or reps every session.</div>
-      <div class="principle"><strong>Rest 2–3 min</strong> between compounds (squat, deadlift, bench, press). <strong>60–90 sec</strong> for isolations.</div>
-      <div class="principle amber">Train to <strong>1–2 reps short of failure</strong> on isolations. Stay <strong>2–3 reps short</strong> on heavy compounds.</div>
-      <div class="principle"><strong>Pull-ups daily</strong> — full working sets on Tue & Sat. 2–3 sub-maximal sets on Mon, Wed, Fri.</div>
+      <div class="principle">Train <strong>9–10 AM fasted.</strong> Coffee with 40ml toned milk at 7 AM is all you need.</div>
+      <div class="principle mint"><strong>Week 1–2:</strong> learn the movements. <strong>Week 3+:</strong> add weight or reps every session.</div>
+      <div class="principle"><strong>Rest 2–3 min</strong> between compounds. <strong>60–90 sec</strong> for isolations.</div>
+      <div class="principle amber">Train to <strong>1–2 reps short of failure</strong> on isolations. <strong>2–3 reps short</strong> on compounds.</div>
+      <div class="principle"><strong>Pull-ups daily</strong> — full working sets Tue & Sat. 2–3 sub-maximal sets Mon, Wed, Fri.</div>
     </div>
   </div>
-
-  <!-- TAB: DIET -->
+  <!-- DIET TAB -->
   <div class="tab-content" id="tab-diet">
     <div class="sec">Indian Meal Plan · ~2,650 kcal</div>
     <div class="meals-list">
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Wake Up</div><div class="meal-time-tag">~7:00 AM</div></div>
-          <div class="meal-kcal">~25 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Iron supplement</span><span class="meal-item-macros">Empty stomach · before coffee</span></div>
-          <div class="meal-item"><span class="meal-item-name">Coffee with 40ml toned milk</span><span class="meal-item-macros">P: 1.3g · C: 2g · F: 0.8g</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Post-Workout Meal</div><div class="meal-time-tag">10:15–10:30 AM</div></div>
-          <div class="meal-kcal">~640 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Whey (1 scoop) + Collagen (1 scoop) in water</span><span class="meal-item-macros">P: 35g · C: 4g · F: 2g</span></div>
-          <div class="meal-item"><span class="meal-item-name">3 whole eggs + 3 egg whites — bhurji style</span><span class="meal-item-macros">P: 30g · C: 2g · F: 14g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Oats (80g dry) cooked in water</span><span class="meal-item-macros">P: 10g · C: 56g · F: 5g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Multivitamin</span><span class="meal-item-macros">With food for absorption</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Mid-Morning Snack</div><div class="meal-time-tag">12:30 PM</div></div>
-          <div class="meal-kcal">~280 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Paneer (100g) — pan-fried with salt & chili</span><span class="meal-item-macros">P: 18g · C: 3g · F: 14g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Roasted chana (40g)</span><span class="meal-item-macros">P: 7g · C: 21g · F: 4g</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Lunch</div><div class="meal-time-tag">2:00–3:00 PM</div></div>
-          <div class="meal-kcal">~680 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Chicken breast (200g) — boiled or tandoori</span><span class="meal-item-macros">P: 44g · C: 0g · F: 6g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Dal (150g cooked moong or masoor)</span><span class="meal-item-macros">P: 11g · C: 24g · F: 1g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Rice (110g cooked) — protein & veg first</span><span class="meal-item-macros">P: 4g · C: 38g · F: 1g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Sabzi (100g seasonal veg, 1 tsp oil)</span><span class="meal-item-macros">P: 2g · C: 10g · F: 4g</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Evening Snack</div><div class="meal-time-tag">5:00–6:00 PM</div></div>
-          <div class="meal-kcal">~245 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Coffee with 40ml toned milk</span><span class="meal-item-macros">P: 1.3g · C: 2g · F: 0.8g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Greek yogurt / curd (200g)</span><span class="meal-item-macros">P: 16g · C: 8g · F: 5g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Roasted chana (25g)</span><span class="meal-item-macros">P: 4g · C: 13g · F: 2g</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-head">
-          <div><div class="meal-time-label">Dinner</div><div class="meal-time-tag">8:30–9:30 PM</div></div>
-          <div class="meal-kcal">~480 kcal</div>
-        </div>
-        <div class="meal-items">
-          <div class="meal-item"><span class="meal-item-name">Chicken or fish (180g) — grilled or light curry</span><span class="meal-item-macros">P: 40g · C: 0g · F: 8g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Rajma or chole (150g cooked)</span><span class="meal-item-macros">P: 10g · C: 24g · F: 2g</span></div>
-          <div class="meal-item"><span class="meal-item-name">Rice (110g cooked)</span><span class="meal-item-macros">P: 3g · C: 32g · F: 1g</span></div>
-        </div>
-      </div>
-
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Wake Up</div><div class="meal-time-tag">~7:00 AM</div></div><div class="meal-kcal">~25 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Iron supplement</span><span class="meal-item-macros">Empty stomach · before coffee</span></div><div class="meal-item"><span class="meal-item-name">Coffee with 40ml toned milk</span><span class="meal-item-macros">P:1.3g · C:2g · F:0.8g</span></div></div></div>
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Post-Workout Meal</div><div class="meal-time-tag">10:15–10:30 AM</div></div><div class="meal-kcal">~640 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Whey (1 scoop) + Collagen (1 scoop)</span><span class="meal-item-macros">P:35g · C:4g · F:2g</span></div><div class="meal-item"><span class="meal-item-name">3 whole eggs + 3 egg whites — bhurji</span><span class="meal-item-macros">P:30g · C:2g · F:14g</span></div><div class="meal-item"><span class="meal-item-name">Oats (80g dry) cooked in water</span><span class="meal-item-macros">P:10g · C:56g · F:5g</span></div><div class="meal-item"><span class="meal-item-name">Multivitamin</span><span class="meal-item-macros">With food for absorption</span></div></div></div>
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Mid-Morning Snack</div><div class="meal-time-tag">12:30 PM</div></div><div class="meal-kcal">~280 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Paneer (100g) — pan-fried with salt & chili</span><span class="meal-item-macros">P:18g · C:3g · F:14g</span></div><div class="meal-item"><span class="meal-item-name">Roasted chana (40g)</span><span class="meal-item-macros">P:7g · C:21g · F:4g</span></div></div></div>
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Lunch</div><div class="meal-time-tag">2:00–3:00 PM</div></div><div class="meal-kcal">~680 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Chicken breast (200g) — boiled or tandoori</span><span class="meal-item-macros">P:44g · C:0g · F:6g</span></div><div class="meal-item"><span class="meal-item-name">Dal (150g cooked moong or masoor)</span><span class="meal-item-macros">P:11g · C:24g · F:1g</span></div><div class="meal-item"><span class="meal-item-name">Rice (110g cooked) — protein & veg first</span><span class="meal-item-macros">P:4g · C:38g · F:1g</span></div><div class="meal-item"><span class="meal-item-name">Sabzi (100g seasonal veg, 1 tsp oil)</span><span class="meal-item-macros">P:2g · C:10g · F:4g</span></div></div></div>
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Evening Snack</div><div class="meal-time-tag">5:00–6:00 PM</div></div><div class="meal-kcal">~245 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Coffee with 40ml toned milk</span><span class="meal-item-macros">P:1.3g · C:2g · F:0.8g</span></div><div class="meal-item"><span class="meal-item-name">Greek yogurt / curd (200g)</span><span class="meal-item-macros">P:16g · C:8g · F:5g</span></div><div class="meal-item"><span class="meal-item-name">Roasted chana (25g)</span><span class="meal-item-macros">P:4g · C:13g · F:2g</span></div></div></div>
+      <div class="meal-card"><div class="meal-head"><div><div class="meal-time-label">Dinner</div><div class="meal-time-tag">8:30–9:30 PM</div></div><div class="meal-kcal">~480 kcal</div></div><div class="meal-items"><div class="meal-item"><span class="meal-item-name">Chicken or fish (180g) — grilled or light curry</span><span class="meal-item-macros">P:40g · C:0g · F:8g</span></div><div class="meal-item"><span class="meal-item-name">Rajma or chole (150g cooked)</span><span class="meal-item-macros">P:10g · C:24g · F:2g</span></div><div class="meal-item"><span class="meal-item-name">Rice (110g cooked)</span><span class="meal-item-macros">P:3g · C:32g · F:1g</span></div></div></div>
     </div>
-
     <div class="sec">Diet Tips</div>
     <div class="diet-tips">
-      <div class="diet-tip">Cook chicken in bulk for 3–4 days. Boil or bake with salt, turmeric, ginger-garlic. Reheat as needed.</div>
+      <div class="diet-tip">Cook chicken in bulk for 3–4 days. Boil or bake with salt, turmeric, ginger-garlic.</div>
       <div class="diet-tip">Dal every day — moong or masoor takes 15 min in a pressure cooker. Cheapest protein source.</div>
-      <div class="diet-tip">Space iron (morning) at least 2 hours away from curd, paneer, and milk — calcium blocks absorption.</div>
+      <div class="diet-tip">Space iron (morning) at least 2 hours from curd, paneer, and milk — calcium blocks absorption.</div>
       <div class="diet-tip">Collagen synthesises best with Vitamin C. Add lime juice or amla, or rely on your multivitamin.</div>
-      <div class="diet-tip">Use 1 tsp oil max per cooking. Mustard or olive oil preferred.</div>
-      <div class="diet-tip">Rice cap: 100–120g cooked per meal. Always eat protein and vegetables before carbs. Never eat carbs alone.</div>
+      <div class="diet-tip">1 tsp oil max per cooking. Mustard or olive oil preferred.</div>
+      <div class="diet-tip">Rice cap: 100–120g cooked per meal. Always eat protein and veg before carbs. Never eat carbs alone.</div>
     </div>
   </div>
-
 </div>
-
 <div class="footer"><span>ROHIT</span> · Lean Bulk Program · PPL×2 Split · 2,650 kcal · 180g P · 290g C · 86g F</div>
-
 <script>
 function switchTab(id){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['macros','workout','diet'][i]===id));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+id));
+  document.querySelectorAll(".tab").forEach((t,i)=>t.classList.toggle("active",["macros","workout","diet"][i]===id));
+  document.querySelectorAll(".tab-content").forEach(c=>c.classList.toggle("active",c.id==="tab-"+id));
 }
 function switchDay(id){
-  document.querySelectorAll('.day-btn').forEach((b,i)=>b.classList.toggle('active',['mon','tue','wed','thu','fri','sat','sun'][i]===id));
-  document.querySelectorAll('.day-panel').forEach(p=>p.style.display=p.id==='day-'+id?'block':'none');
+  document.querySelectorAll(".day-btn").forEach((b,i)=>b.classList.toggle("active",["mon","tue","wed","thu","fri","sat","sun"][i]===id));
+  document.querySelectorAll("[id^='day-']").forEach(p=>p.style.display=p.id==="day-"+id?"block":"none");
 }
 </script>
 </body>
