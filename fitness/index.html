@@ -12,22 +12,29 @@
 // ════════════════════════════════════════════════════════════════
 const DATA = [
   {
-    day:"DAY 1", date:"2026-05-04", label:"Mon, May 4", workout:"Push · Chest",
+    day:"DAY 1", date:"2026-05-03", label:"Sun, May 3", workout:"Push · Chest",
     calories:2050, protein:170, carbs:173, fat:45, weight:null,
     sleep:{duration:"9h 0m",dH:9.0,score:91,bed:"8:59 PM",wake:"6:01 AM",
            deepH:2.13,remH:1.8,lightH:5.05,awakeH:0.03,
            deep:"2h 8m",rem:"1h 48m",light:"5h 3m",awake:"2m"}
   },
   {
-    day:"DAY 2", date:"2026-05-05", label:"Tue, May 5", workout:"Pull · Back",
+    day:"DAY 2", date:"2026-05-04", label:"Mon, May 4", workout:"Pull · Back",
     calories:2476, protein:169, carbs:222, fat:103, weight:58.1,
     sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
            deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,
            deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}
   },
   {
-    day:"DAY 3", date:"2026-05-06", label:"Wed, May 6", workout:"Legs",
+    day:"DAY 3", date:"2026-05-05", label:"Tue, May 5", workout:"Legs",
     calories:2086, protein:188, carbs:240, fat:47, weight:58.3,
+    sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
+           deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,
+           deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}
+  },
+  {
+    day:"DAY 4", date:"2026-05-06", label:"Wed, May 6", workout:"Push · Chest",
+    calories:null, protein:null, carbs:null, fat:null, weight:58.7,
     sleep:{duration:"5h 44m",dH:5.73,score:75,bed:"11:40 PM",wake:"5:34 AM",
            deepH:0.85,remH:1.35,lightH:3.47,awakeH:0.15,
            deep:"51m",rem:"1h 21m",light:"3h 28m",awake:"9m"}
@@ -105,7 +112,8 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .sblbl{font-size:0.5rem;color:var(--muted);text-align:center;}
 .slp-meta{display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid rgba(255,255,255,0.04);margin-top:7px;}
 .smeta{font-size:0.58rem;color:var(--muted);}.smeta span{color:var(--text);font-weight:600;}
-.no-sleep{font-size:0.72rem;color:var(--muted);padding:16px 0;text-align:center;}
+.no-data{font-size:0.72rem;color:var(--muted);padding:16px 0;text-align:center;}
+.in-progress{font-size:0.72rem;color:var(--amber);padding:16px 0;text-align:center;}
 .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
 .sumbox{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;padding:14px 12px;text-align:center;}
 .sumbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
@@ -249,6 +257,7 @@ function stageBars(s){
     .map(([n,v,k,c])=>`<div class="sbw"><div class="sbtrack"><div class="sbfill" style="height:${hp(s[k])}%;background:${c}"></div></div><div class="sbval" style="color:${c}">${v}</div><div class="sblbl">${n}</div></div>`).join("");
 }
 function macroHTML(d){
+  if(d.calories===null) return`<div class="in-progress">⏳ Logging in progress — check back tonight.</div>`;
   return`<div class="macro-big">
     <div class="mb"><div class="mv c-k">${d.calories.toLocaleString()}</div><div class="ml">kcal</div></div>
     <div class="mb"><div class="mv c-p">${d.protein}g</div><div class="ml">Protein</div></div>
@@ -264,7 +273,7 @@ function macroHTML(d){
   ${pct(d.protein,T.prot)<93?`<div class="tip" style="margin-top:5px">💪 ${T.prot-d.protein}g protein short.</div>`:""}`;
 }
 function sleepHTML(s){
-  if(!s) return`<div class="no-sleep">No sleep data for this day.</div>`;
+  if(!s) return`<div class="no-data">No sleep data for this day.</div>`;
   const gap=T.sleep-s.dH;
   return`<div class="sleep-today">
     <div class="sleep-main"><div class="slp-l">Duration</div><div class="slp-d">${s.duration}</div><div class="slp-t">${s.bed} → ${s.wake}</div></div>
@@ -279,14 +288,16 @@ function sleepHTML(s){
 }
 const lW=[...DATA].reverse().find(d=>d.weight!==null);
 if(lW) document.getElementById("heroWeight").textContent=lW.weight;
-document.getElementById("dayNum").textContent=DATA.length+1;
+document.getElementById("dayNum").textContent=DATA.length;
 (()=>{const d=DATA[DATA.length-1];
   document.getElementById("todayLabel").textContent=d.label+" · "+d.workout;
   document.getElementById("todayMacros").innerHTML=macroHTML(d);
   document.getElementById("todaySleep").innerHTML=sleepHTML(d.sleep);})();
-(()=>{const n=DATA.length;
-  const aC=Math.round(DATA.reduce((a,d)=>a+d.calories,0)/n);
-  const aP=Math.round(DATA.reduce((a,d)=>a+d.protein,0)/n);
+(()=>{
+  const logged=DATA.filter(d=>d.calories!==null);
+  const n=logged.length||1;
+  const aC=Math.round(logged.reduce((a,d)=>a+d.calories,0)/n);
+  const aP=Math.round(logged.reduce((a,d)=>a+d.protein,0)/n);
   const slpData=DATA.filter(d=>d.sleep);
   const aS=slpData.length?(slpData.reduce((a,d)=>a+d.sleep.dH,0)/slpData.length).toFixed(1):"—";
   const ws=DATA.filter(d=>d.weight!==null).map(d=>d.weight);
@@ -316,7 +327,7 @@ function renderCal(){
     let numCls="cd-num"+(e?" logged":"")+(iT?" today":"");
     let inner=`<div class="${numCls}">${d}</div>`;
     if(e){
-      inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div>`;
+      inner+=`<div class="cd-cal">${e.calories!==null?e.calories.toLocaleString()+" kcal":"In progress"}</div>`;
       inner+=`<div class="cd-slp">${e.sleep?e.sleep.duration:"—"}</div>`;
       if(e.weight) inner+=`<div class="cd-wt">${e.weight}kg</div>`;
       h+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
