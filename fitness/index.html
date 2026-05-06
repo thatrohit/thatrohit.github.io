@@ -14,7 +14,9 @@ const DATA = [
   {
     day:"DAY 1", date:"2026-05-04", label:"Mon, May 4", workout:"Push · Chest",
     calories:2050, protein:170, carbs:173, fat:45, weight:null,
-    sleep:null
+    sleep:{duration:"9h 0m",dH:9.0,score:91,bed:"8:59 PM",wake:"6:01 AM",
+           deepH:2.13,remH:1.8,lightH:5.05,awakeH:0.03,
+           deep:"2h 8m",rem:"1h 48m",light:"5h 3m",awake:"2m"}
   },
   {
     day:"DAY 2", date:"2026-05-05", label:"Tue, May 5", workout:"Pull · Back",
@@ -26,13 +28,6 @@ const DATA = [
   {
     day:"DAY 3", date:"2026-05-06", label:"Wed, May 6", workout:"Legs",
     calories:2086, protein:188, carbs:240, fat:47, weight:58.3,
-    sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
-           deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,
-           deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}
-  },
-  {
-    day:"DAY 4", date:"2026-05-07", label:"Thu, May 7", workout:"Rest",
-    calories:0, protein:0, carbs:0, fat:0, weight:58.7,
     sleep:{duration:"5h 44m",dH:5.73,score:75,bed:"11:40 PM",wake:"5:34 AM",
            deepH:0.85,remH:1.35,lightH:3.47,awakeH:0.15,
            deep:"51m",rem:"1h 21m",light:"3h 28m",awake:"9m"}
@@ -100,7 +95,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .slp-l{font-size:0.54rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
 .slp-d{font-family:"Rajdhani",sans-serif;font-size:1.6rem;font-weight:700;color:var(--cyan);line-height:1;}
 .slp-t{font-size:0.6rem;color:var(--muted);margin-top:2px;}
-.slp-snum{font-family:"Rajdhani",sans-serif;font-size:2rem;font-weight:700;color:var(--amber);line-height:1;text-align:right;}
+.slp-snum{font-family:"Rajdhani",sans-serif;font-size:2rem;font-weight:700;line-height:1;text-align:right;}
 .slp-slbl{font-size:0.58rem;color:var(--muted);text-align:right;}
 .stage-row{display:flex;gap:5px;}
 .sbw{flex:1;display:flex;flex-direction:column;gap:3px;align-items:center;}
@@ -111,7 +106,6 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 .slp-meta{display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid rgba(255,255,255,0.04);margin-top:7px;}
 .smeta{font-size:0.58rem;color:var(--muted);}.smeta span{color:var(--text);font-weight:600;}
 .no-sleep{font-size:0.72rem;color:var(--muted);padding:16px 0;text-align:center;}
-.rest-day{font-size:0.72rem;color:var(--amber);padding:16px 0;text-align:center;}
 .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
 .sumbox{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:10px;padding:14px 12px;text-align:center;}
 .sumbox-l{font-size:0.56rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
@@ -246,6 +240,7 @@ body{background:var(--navy);color:var(--text);font-family:"Open Sans",sans-serif
 <script>
 function pct(v,t){return Math.min(Math.round(v/t*100),100);}
 function byDate(s){return DATA.find(d=>d.date===s)||null;}
+function scoreColor(s){return s>=85?"var(--mint)":s>=70?"var(--amber)":"var(--rose)";}
 function stageBars(s){
   const mx=Math.max(s.deepH,s.remH,s.lightH,s.awakeH);
   const hp=v=>Math.round(v/mx*100);
@@ -254,7 +249,6 @@ function stageBars(s){
     .map(([n,v,k,c])=>`<div class="sbw"><div class="sbtrack"><div class="sbfill" style="height:${hp(s[k])}%;background:${c}"></div></div><div class="sbval" style="color:${c}">${v}</div><div class="sblbl">${n}</div></div>`).join("");
 }
 function macroHTML(d){
-  if(d.calories===0) return`<div class="rest-day">🛋️ Rest day — no macros logged.</div>`;
   return`<div class="macro-big">
     <div class="mb"><div class="mv c-k">${d.calories.toLocaleString()}</div><div class="ml">kcal</div></div>
     <div class="mb"><div class="mv c-p">${d.protein}g</div><div class="ml">Protein</div></div>
@@ -271,14 +265,15 @@ function macroHTML(d){
 }
 function sleepHTML(s){
   if(!s) return`<div class="no-sleep">No sleep data for this day.</div>`;
+  const gap=T.sleep-s.dH;
   return`<div class="sleep-today">
     <div class="sleep-main"><div class="slp-l">Duration</div><div class="slp-d">${s.duration}</div><div class="slp-t">${s.bed} → ${s.wake}</div></div>
-    <div><div class="slp-snum">${s.score}</div><div class="slp-slbl">Score</div></div>
+    <div><div class="slp-snum" style="color:${scoreColor(s.score)}">${s.score}</div><div class="slp-slbl">Score</div></div>
   </div>
   <div class="stage-row">${stageBars(s)}</div>
   <div class="slp-meta">
     <div class="smeta">Target: <span>7–8 hrs</span></div>
-    <div class="smeta">Gap: <span>−${(T.sleep-s.dH).toFixed(1)} hrs</span></div>
+    <div class="smeta">${gap>0?`Gap: <span>−${gap.toFixed(1)} hrs</span>`:`<span style="color:var(--mint)">✓ Target met</span>`}</div>
     <div class="smeta">Awake: <span>${s.awake}</span></div>
   </div>`;
 }
@@ -289,11 +284,9 @@ document.getElementById("dayNum").textContent=DATA.length+1;
   document.getElementById("todayLabel").textContent=d.label+" · "+d.workout;
   document.getElementById("todayMacros").innerHTML=macroHTML(d);
   document.getElementById("todaySleep").innerHTML=sleepHTML(d.sleep);})();
-(()=>{
-  const trainDays=DATA.filter(d=>d.calories>0);
-  const n=trainDays.length||1;
-  const aC=Math.round(trainDays.reduce((a,d)=>a+d.calories,0)/n);
-  const aP=Math.round(trainDays.reduce((a,d)=>a+d.protein,0)/n);
+(()=>{const n=DATA.length;
+  const aC=Math.round(DATA.reduce((a,d)=>a+d.calories,0)/n);
+  const aP=Math.round(DATA.reduce((a,d)=>a+d.protein,0)/n);
   const slpData=DATA.filter(d=>d.sleep);
   const aS=slpData.length?(slpData.reduce((a,d)=>a+d.sleep.dH,0)/slpData.length).toFixed(1):"—";
   const ws=DATA.filter(d=>d.weight!==null).map(d=>d.weight);
@@ -323,7 +316,7 @@ function renderCal(){
     let numCls="cd-num"+(e?" logged":"")+(iT?" today":"");
     let inner=`<div class="${numCls}">${d}</div>`;
     if(e){
-      inner+=`<div class="cd-cal">${e.calories>0?e.calories.toLocaleString()+" kcal":"Rest"}</div>`;
+      inner+=`<div class="cd-cal">${e.calories.toLocaleString()} kcal</div>`;
       inner+=`<div class="cd-slp">${e.sleep?e.sleep.duration:"—"}</div>`;
       if(e.weight) inner+=`<div class="cd-wt">${e.weight}kg</div>`;
       h+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
@@ -355,11 +348,10 @@ function lds(label,values,color,dashed){
     pointBackgroundColor:color,fill:!dashed,tension:0.35,spanGaps:true};}
 const bO=(mn,mx,u)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:9}}},
   scales:{y:{min:mn,max:mx,title:{display:!!u,text:u}},x:{grid:{color:"rgba(30,52,72,0.6)"}}}});
-const trainData=DATA.map(d=>d.calories>0?d.calories:null);
-new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",trainData,"#00c8f0"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(0,232,168,0.6)",true)]},options:bO(1500,3000,"kcal")});
-new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein>0?d.protein:null),"#00e8a8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(240,168,0,0.6)",true)]},options:bO(100,220,"g")});
-new Chart(document.getElementById("cfChart"),{type:"line",data:{labels,datasets:[lds("Carbs",DATA.map(d=>d.carbs>0?d.carbs:null),"#f0a800"),lds("Carb Target 290g",Array(DATA.length).fill(290),"rgba(240,168,0,0.4)",true),lds("Fat",DATA.map(d=>d.fat>0?d.fat:null),"#c080ff"),lds("Fat Target 86g",Array(DATA.length).fill(86),"rgba(192,128,255,0.4)",true)]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:7}}},scales:{y:{title:{display:true,text:"g"}}}}});
-new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep?d.sleep.dH:null),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bO(4,9,"hours")});
+new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",DATA.map(d=>d.calories),"#00c8f0"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(0,232,168,0.6)",true)]},options:bO(1500,3000,"kcal")});
+new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein),"#00e8a8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(240,168,0,0.6)",true)]},options:bO(100,220,"g")});
+new Chart(document.getElementById("cfChart"),{type:"line",data:{labels,datasets:[lds("Carbs",DATA.map(d=>d.carbs),"#f0a800"),lds("Carb Target 290g",Array(DATA.length).fill(290),"rgba(240,168,0,0.4)",true),lds("Fat",DATA.map(d=>d.fat),"#c080ff"),lds("Fat Target 86g",Array(DATA.length).fill(86),"rgba(192,128,255,0.4)",true)]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:7}}},scales:{y:{title:{display:true,text:"g"}}}}});
+new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep?d.sleep.dH:null),"#00c8f0"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(0,232,168,0.5)",true)]},options:bO(4,10,"hours")});
 new Chart(document.getElementById("wChart"),{type:"line",data:{labels,datasets:[lds("Weight",DATA.map(d=>d.weight),"#00e8a8"),lds("Start 59kg",Array(DATA.length).fill(59),"rgba(240,168,0,0.4)",true)]},options:bO(57,62,"kg")});
 new Chart(document.getElementById("ssChart"),{type:"line",data:{labels,datasets:[
   {label:"Deep",data:DATA.map(d=>d.sleep?d.sleep.deepH:null),borderColor:"#4060c8",backgroundColor:"rgba(64,96,200,0.15)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#4060c8",spanGaps:true},
