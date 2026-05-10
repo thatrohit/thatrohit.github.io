@@ -8,55 +8,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 const DATA = [
-  {
-    day:"DAY 1", date:"2026-05-03", label:"Sun, May 3", workout:"Push · Chest",
-    calories:2050, protein:170, carbs:173, fat:45, weight:null,
-    sleep:{duration:"9h 0m",dH:9.0,score:91,bed:"8:59 PM",wake:"6:01 AM",
-           deepH:2.13,remH:1.8,lightH:5.05,awakeH:0.03,
-           deep:"2h 8m",rem:"1h 48m",light:"5h 3m",awake:"2m"}
-  },
-  {
-    day:"DAY 2", date:"2026-05-04", label:"Mon, May 4", workout:"Pull · Back",
-    calories:2476, protein:169, carbs:222, fat:103, weight:58.1,
-    sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",
-           deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,
-           deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}
-  },
-  {
-    day:"DAY 3", date:"2026-05-05", label:"Tue, May 5", workout:"Legs",
-    calories:2086, protein:188, carbs:240, fat:47, weight:58.3,
-    sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",
-           deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,
-           deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}
-  },
-  {
-    day:"DAY 4", date:"2026-05-06", label:"Wed, May 6", workout:"Legs",
-    calories:2226, protein:187, carbs:253, fat:55, weight:58.7,
-    sleep:{duration:"5h 44m",dH:5.73,score:75,bed:"11:40 PM",wake:"5:34 AM",
-           deepH:0.85,remH:1.35,lightH:3.47,awakeH:0.15,
-           deep:"51m",rem:"1h 21m",light:"3h 28m",awake:"9m"}
-  },
-  {
-    day:"DAY 5", date:"2026-05-07", label:"Thu, May 7", workout:"Rest Day",
-    calories:2670, protein:205, carbs:221, fat:109, weight:58.7,
-    sleep:{duration:"7h 10m",dH:7.17,score:85,bed:"10:56 PM",wake:"6:13 AM",
-           deepH:1.27,remH:1.63,lightH:4.0,awakeH:0.1,
-           deep:"1h 16m",rem:"1h 38m",light:"4h",awake:"6m"}
-  },
-  {
-    day:"DAY 6", date:"2026-05-08", label:"Fri, May 8", workout:"Push · Hypertrophy",
-    calories:2594, protein:203, carbs:286, fat:74, weight:58.7,
-    sleep:{duration:"7h 31m",dH:7.52,score:86,bed:"10:47 PM",wake:"6:27 AM",
-           deepH:2.07,remH:1.05,lightH:4.12,awakeH:0.15,
-           deep:"2h 4m",rem:"1h 3m",light:"4h 7m",awake:"9m"}
-  },
-  {
-    day:"DAY 7", date:"2026-05-09", label:"Sat, May 9", workout:"Pull · Hypertrophy",
-    calories:1830, protein:141, carbs:180, fat:65, weight:58.6,
-    sleep:{duration:"3h 52m",dH:3.87,score:61,bed:"2:28 AM",wake:"6:22 AM",
-           deepH:1.2,remH:0.32,lightH:2.3,awakeH:0.03,
-           deep:"1h 12m",rem:"19m",light:"2h 18m",awake:"2m"}
-  },
+  {day:"DAY 1",date:"2026-05-03",label:"Sun, May 3",workout:"Push · Chest",
+   calories:2050,protein:170,carbs:173,fat:45,weight:null,
+   sleep:{duration:"9h 0m",dH:9.0,score:91,bed:"8:59 PM",wake:"6:01 AM",deepH:2.13,remH:1.8,lightH:5.05,awakeH:0.03,deep:"2h 8m",rem:"1h 48m",light:"5h 3m",awake:"2m"}},
+  {day:"DAY 2",date:"2026-05-04",label:"Mon, May 4",workout:"Pull · Back",
+   calories:2476,protein:169,carbs:222,fat:103,weight:58.1,
+   sleep:{duration:"6h 12m",dH:6.2,score:69,bed:"10:32 PM",wake:"5:58 AM",deepH:1.5,remH:1.03,lightH:3.65,awakeH:1.23,deep:"1h 30m",rem:"1h 2m",light:"3h 39m",awake:"1h 14m"}},
+  {day:"DAY 3",date:"2026-05-05",label:"Tue, May 5",workout:"Legs",
+   calories:2086,protein:188,carbs:240,fat:47,weight:58.3,
+   sleep:{duration:"6h 29m",dH:6.48,score:71,bed:"11:29 PM",wake:"6:35 AM",deepH:1.35,remH:0.98,lightH:3.85,awakeH:0.60,deep:"1h 21m",rem:"59m",light:"3h 51m",awake:"36m"}},
+  {day:"DAY 4",date:"2026-05-06",label:"Wed, May 6",workout:"Legs",
+   calories:2226,protein:187,carbs:253,fat:55,weight:58.7,
+   sleep:{duration:"5h 44m",dH:5.73,score:75,bed:"11:40 PM",wake:"5:34 AM",deepH:0.85,remH:1.35,lightH:3.47,awakeH:0.15,deep:"51m",rem:"1h 21m",light:"3h 28m",awake:"9m"}},
+  {day:"DAY 5",date:"2026-05-07",label:"Thu, May 7",workout:"Rest Day",
+   calories:2670,protein:205,carbs:221,fat:109,weight:58.7,
+   sleep:{duration:"7h 10m",dH:7.17,score:85,bed:"10:56 PM",wake:"6:13 AM",deepH:1.27,remH:1.63,lightH:4.0,awakeH:0.1,deep:"1h 16m",rem:"1h 38m",light:"4h",awake:"6m"}},
+  {day:"DAY 6",date:"2026-05-08",label:"Fri, May 8",workout:"Push · Hypertrophy",
+   calories:2594,protein:203,carbs:286,fat:74,weight:58.7,
+   sleep:{duration:"7h 31m",dH:7.52,score:86,bed:"10:47 PM",wake:"6:27 AM",deepH:2.07,remH:1.05,lightH:4.12,awakeH:0.15,deep:"2h 4m",rem:"1h 3m",light:"4h 7m",awake:"9m"}},
+  {day:"DAY 7",date:"2026-05-09",label:"Sat, May 9",workout:"Pull · Hypertrophy",
+   calories:1830,protein:141,carbs:180,fat:65,weight:58.6,
+   sleep:{duration:"3h 52m",dH:3.87,score:61,bed:"2:28 AM",wake:"6:22 AM",deepH:1.2,remH:0.32,lightH:2.3,awakeH:0.03,deep:"1h 12m",rem:"19m",light:"2h 18m",awake:"2m"}},
+  {day:"DAY 8",date:"2026-05-10",label:"Sun, May 10",workout:"Rest Day",
+   calories:null,protein:null,carbs:null,fat:null,weight:null,
+   sleep:{duration:"9h 27m",dH:9.45,score:94,bed:"9:55 PM",wake:"7:31 AM",deepH:1.65,remH:1.75,lightH:5.88,awakeH:0.15,deep:"1h 39m",rem:"1h 45m",light:"5h 53m",awake:"9m"}},
 ];
 const T={cal:2650,prot:180,carbs:290,fat:86,sleep:7.5};
 </script>
@@ -83,7 +58,7 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .hero-center{flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:center;border-right:1.5px solid rgba(255,255,255,0.6);}
 .hero-tag{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--sky);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:8px;}
 .hero-name{font-family:"DM Mono",monospace;font-size:2.6rem;font-weight:600;color:var(--text);line-height:1;margin-bottom:6px;}
-.hero-sub{font-family:"DM Sans",sans-serif;font-size:0.7rem;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;font-weight:500;}
+.hero-sub{font-size:0.7rem;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;font-weight:500;}
 .hero-pills{display:flex;gap:6px;flex-wrap:wrap;}
 .pill{background:rgba(56,171,228,0.1);border:1px solid rgba(56,171,228,0.2);border-radius:50px;padding:4px 12px;font-size:0.65rem;color:var(--text-mid);font-weight:500;}
 .pill span{color:var(--sky);font-weight:600;}
@@ -92,7 +67,7 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .sbox:nth-child(even){border-right:none;}.sbox:nth-last-child(-n+2){border-bottom:none;}
 .sbox-l{font-family:"DM Mono",monospace;font-size:0.52rem;color:var(--text-soft);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:500;}
 .sbox-v{font-family:"DM Mono",monospace;font-size:1.3rem;font-weight:600;color:var(--sky);line-height:1;}
-.sbox-u{font-family:"DM Sans",sans-serif;font-size:0.56rem;color:var(--text-soft);margin-top:3px;}
+.sbox-u{font-size:0.56rem;color:var(--text-soft);margin-top:3px;}
 .tbar{position:relative;z-index:1;background:rgba(255,255,255,0.65);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 24px;}
 .tbar-inner{max-width:1000px;margin:0 auto;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
 .ti{display:flex;flex-direction:column;gap:1px;}
@@ -108,7 +83,7 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .macro-big{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px;}
 .mb{background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(201,238,255,0.4));border:1.5px solid rgba(255,255,255,0.9);border-radius:14px;padding:10px 6px;text-align:center;box-shadow:var(--shadow-sm);}
 .mb .mv{font-family:"DM Mono",monospace;font-size:1.1rem;font-weight:600;line-height:1;}
-.mb .ml{font-family:"DM Sans",sans-serif;font-size:0.52rem;color:var(--text-soft);letter-spacing:0.7px;text-transform:uppercase;margin-top:3px;font-weight:600;}
+.mb .ml{font-size:0.52rem;color:var(--text-soft);letter-spacing:0.7px;text-transform:uppercase;margin-top:3px;font-weight:600;}
 .c-k{color:var(--sky);}.c-p{color:var(--peri);}.c-c{color:#5ba8d4;}.c-f{color:#4888c4;}
 .mbar-list{display:flex;flex-direction:column;gap:5px;}
 .mbar{display:flex;align-items:center;gap:7px;}
@@ -120,24 +95,25 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .sleep-main{flex:1;}
 .slp-l{font-family:"DM Mono",monospace;font-size:0.52rem;color:var(--text-soft);letter-spacing:1.5px;text-transform:uppercase;font-weight:500;}
 .slp-d{font-family:"DM Mono",monospace;font-size:1.5rem;font-weight:600;color:var(--sky);line-height:1;}
-.slp-t{font-family:"DM Sans",sans-serif;font-size:0.62rem;color:var(--text-soft);margin-top:3px;}
+.slp-t{font-size:0.62rem;color:var(--text-soft);margin-top:3px;}
 .slp-snum{font-family:"DM Mono",monospace;font-size:1.8rem;font-weight:600;line-height:1;text-align:right;}
-.slp-slbl{font-family:"DM Sans",sans-serif;font-size:0.58rem;color:var(--text-soft);text-align:right;margin-top:2px;}
+.slp-slbl{font-size:0.58rem;color:var(--text-soft);text-align:right;margin-top:2px;}
 .stage-row{display:flex;gap:5px;}
 .sbw{flex:1;display:flex;flex-direction:column;gap:3px;align-items:center;}
 .sbtrack{width:100%;height:22px;background:rgba(56,171,228,0.08);border-radius:3px;display:flex;align-items:flex-end;overflow:hidden;}
 .sbfill{width:100%;border-radius:3px;}
 .sbval{font-family:"DM Mono",monospace;font-size:0.58rem;font-weight:600;text-align:center;}
-.sblbl{font-family:"DM Sans",sans-serif;font-size:0.5rem;color:var(--text-soft);text-align:center;font-weight:500;}
+.sblbl{font-size:0.5rem;color:var(--text-soft);text-align:center;font-weight:500;}
 .slp-meta{display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid var(--border);margin-top:7px;}
-.smeta{font-family:"DM Sans",sans-serif;font-size:0.6rem;color:var(--text-soft);font-weight:500;}
+.smeta{font-size:0.6rem;color:var(--text-soft);font-weight:500;}
 .smeta span{color:var(--text);font-weight:600;}
 .no-data{font-size:0.72rem;color:var(--text-soft);padding:16px 0;text-align:center;}
+.in-progress{font-size:0.72rem;color:var(--orange);padding:16px 0;text-align:center;font-weight:600;}
 .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
 .sumbox{background:var(--glass);backdrop-filter:blur(16px);border:1.5px solid rgba(255,255,255,0.85);border-radius:16px;padding:14px 12px;text-align:center;box-shadow:var(--shadow-sm);}
 .sumbox-l{font-family:"DM Mono",monospace;font-size:0.54rem;color:var(--text-soft);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:500;}
 .sumbox-v{font-family:"DM Mono",monospace;font-size:1.35rem;font-weight:600;line-height:1;}
-.sumbox-s{font-family:"DM Sans",sans-serif;font-size:0.6rem;color:var(--text-soft);margin-top:3px;}
+.sumbox-s{font-size:0.6rem;color:var(--text-soft);margin-top:3px;}
 .cal-wrap{background:var(--glass);backdrop-filter:blur(20px);border:1.5px solid rgba(255,255,255,0.85);border-radius:20px;overflow:hidden;margin-bottom:22px;box-shadow:var(--shadow-sm);}
 .cal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.5);}
 .cal-month{font-family:"DM Mono",monospace;font-size:1rem;font-weight:600;color:var(--text);letter-spacing:0.5px;}
@@ -166,8 +142,10 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .tip.w{border-color:var(--orange);background:rgba(224,128,32,0.06);}
 .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .cc{background:var(--glass);backdrop-filter:blur(20px);border:1.5px solid rgba(255,255,255,0.85);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm);}
-.cc-title{font-family:"DM Mono",monospace;font-size:0.66rem;font-weight:600;letter-spacing:1px;color:var(--text-soft);text-transform:uppercase;margin-bottom:12px;}
-.cw{position:relative;height:160px;}
+.cc-title{font-family:"DM Mono",monospace;font-size:0.66rem;font-weight:600;letter-spacing:1px;color:var(--text-soft);text-transform:uppercase;margin-bottom:4px;}
+.cc-sub{font-size:0.6rem;color:var(--text-soft);margin-bottom:10px;display:flex;gap:12px;align-items:center;}
+.legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:3px;}
+.cw{position:relative;height:170px;}
 .wrow{display:flex;align-items:center;gap:10px;background:rgba(42,144,80,0.06);border:1.5px solid rgba(42,144,80,0.15);border-radius:12px;padding:9px 12px;margin-top:10px;}
 .wv{font-family:"DM Mono",monospace;font-size:1.15rem;font-weight:600;color:var(--green);}
 .wl{font-family:"DM Mono",monospace;font-size:0.56rem;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;font-weight:500;}
@@ -243,12 +221,36 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
   </div>
   <div class="sec">Progress Trends</div>
   <div class="charts-grid">
-    <div class="cc"><div class="cc-title">🔥 Calories</div><div class="cw"><canvas id="cChart"></canvas></div></div>
-    <div class="cc"><div class="cc-title">💪 Protein</div><div class="cw"><canvas id="pChart"></canvas></div></div>
-    <div class="cc"><div class="cc-title">🍚 Carbs & Fat</div><div class="cw"><canvas id="cfChart"></canvas></div></div>
-    <div class="cc"><div class="cc-title">🌙 Sleep Duration</div><div class="cw"><canvas id="slChart"></canvas></div></div>
-    <div class="cc"><div class="cc-title">⚖️ Weight</div><div class="cw"><canvas id="wChart"></canvas></div></div>
-    <div class="cc"><div class="cc-title">🛌 Sleep Stages</div><div class="cw"><canvas id="ssChart"></canvas></div></div>
+    <div class="cc">
+      <div class="cc-title">🔥 Calories</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#2a9050"></span>On target</span><span><span class="legend-dot" style="background:#e05060"></span>Below target</span><span style="border-top:2px dashed rgba(56,171,228,0.5);width:16px;display:inline-block;vertical-align:middle"></span>Target</span></div>
+      <div class="cw"><canvas id="cChart"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">💪 Protein</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#2a9050"></span>On target</span><span><span class="legend-dot" style="background:#e05060"></span>Below target</span></div>
+      <div class="cw"><canvas id="pChart"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">🍚 Carbs & Fat</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#5ba8d4"></span>Carbs</span><span><span class="legend-dot" style="background:#4888c4"></span>Fat</span></div>
+      <div class="cw"><canvas id="cfChart"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">🌙 Sleep Duration</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#2a9050"></span>Target met</span><span><span class="legend-dot" style="background:#e05060"></span>Below target</span></div>
+      <div class="cw"><canvas id="slChart"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">⚖️ Weight</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#2a9050"></span>Gaining</span><span style="border-top:2px dashed rgba(224,128,32,0.5);width:16px;display:inline-block;vertical-align:middle"></span>Start</span></div>
+      <div class="cw"><canvas id="wChart"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">🛌 Sleep Stages</div>
+      <div class="cc-sub"><span><span class="legend-dot" style="background:#4060c8"></span>Deep</span><span><span class="legend-dot" style="background:#7da4e8"></span>REM</span><span><span class="legend-dot" style="background:#38abe4"></span>Light</span></div>
+      <div class="cw"><canvas id="ssChart"></canvas></div>
+    </div>
   </div>
 </div>
 <div class="footer"><strong>ROHIT</strong> · Lean Bulk · 2,650 kcal · 180g P · 290g C · 86g F</div>
@@ -273,6 +275,7 @@ function stageBars(s){
     .map(([n,v,k,c])=>`<div class="sbw"><div class="sbtrack"><div class="sbfill" style="height:${hp(s[k])}%;background:${c}"></div></div><div class="sbval" style="color:${c}">${v}</div><div class="sblbl">${n}</div></div>`).join("");
 }
 function macroHTML(d){
+  if(d.calories===null) return`<div class="in-progress">⏳ Logging in progress — check back tonight.</div>`;
   return`<div class="macro-big">
     <div class="mb"><div class="mv c-k">${d.calories.toLocaleString()}</div><div class="ml">kcal</div></div>
     <div class="mb"><div class="mv c-p">${d.protein}g</div><div class="ml">Protein</div></div>
@@ -342,7 +345,7 @@ function renderCal(){
     let numCls="cd-num"+(e?" logged":"")+(iT?" today":"");
     let inner=`<div class="${numCls}">${d}</div>`;
     if(e){
-      inner+=`<div class="cd-cal">${e.calories!==null?e.calories.toLocaleString()+" kcal":"—"}</div>`;
+      inner+=`<div class="cd-cal">${e.calories!==null?e.calories.toLocaleString()+" kcal":"In progress"}</div>`;
       inner+=`<div class="cd-slp">${e.sleep?e.sleep.duration:"—"}</div>`;
       if(e.weight) inner+=`<div class="cd-wt">${e.weight}kg</div>`;
       h+=`<div class="${cls}" onclick="openModal('${ds}')">${inner}</div>`;
@@ -365,30 +368,175 @@ function openModal(ds){
 }
 function overlayClick(e){if(e.target===document.getElementById("overlay"))closeModal();}
 function closeModal(){document.getElementById("overlay").classList.remove("open");}
-Chart.defaults.color="#6a8aaa";
-Chart.defaults.borderColor="rgba(56,171,228,0.1)";
+
+// ── CHART HELPERS ──
 Chart.defaults.font.family="DM Mono, monospace";
-Chart.defaults.font.size=11;
+Chart.defaults.font.size=10;
+Chart.defaults.color="#6a8aaa";
+
+const GREEN="#2a9050", RED="#e05060", ORANGE="#e08020";
+const SKY="#38abe4", PERI="#7da4e8", BLUE="#4888c4", STEEL="#5ba8d4";
+
 const labels=DATA.map(d=>d.label.split(", ")[1]);
-function lds(label,values,color,dashed){
-  return{label,data:values,borderColor:color,
-    backgroundColor:dashed?"transparent":color.replace(/[\d.]+\)$/,"0.1)").replace("rgb(","rgba("),
-    borderWidth:dashed?1.5:2.5,borderDash:dashed?[5,4]:[],pointRadius:dashed?0:4,
-    pointBackgroundColor:color,fill:!dashed,tension:0.35,spanGaps:true};}
-const bO=(mn,mx,u)=>({responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{labels:{boxWidth:9,padding:9}}},
-  scales:{y:{min:mn,max:mx,title:{display:!!u,text:u},grid:{color:"rgba(56,171,228,0.07)"}},
-          x:{grid:{color:"rgba(56,171,228,0.07)"}}}});
-new Chart(document.getElementById("cChart"),{type:"line",data:{labels,datasets:[lds("Calories",DATA.map(d=>d.calories),"#38abe4"),lds("Target 2,650",Array(DATA.length).fill(2650),"rgba(125,164,232,0.6)",true)]},options:bO(1500,3000,"kcal")});
-new Chart(document.getElementById("pChart"),{type:"line",data:{labels,datasets:[lds("Protein",DATA.map(d=>d.protein),"#7da4e8"),lds("Target 180g",Array(DATA.length).fill(180),"rgba(56,171,228,0.5)",true)]},options:bO(100,220,"g")});
-new Chart(document.getElementById("cfChart"),{type:"line",data:{labels,datasets:[lds("Carbs",DATA.map(d=>d.carbs),"#5ba8d4"),lds("Carb Target",Array(DATA.length).fill(290),"rgba(91,168,212,0.4)",true),lds("Fat",DATA.map(d=>d.fat),"#4888c4"),lds("Fat Target",Array(DATA.length).fill(86),"rgba(72,136,196,0.4)",true)]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:7}}},scales:{y:{title:{display:true,text:"g"},grid:{color:"rgba(56,171,228,0.07)"}},x:{grid:{color:"rgba(56,171,228,0.07)"}}}}});
-new Chart(document.getElementById("slChart"),{type:"line",data:{labels,datasets:[lds("Sleep",DATA.map(d=>d.sleep?d.sleep.dH:null),"#38abe4"),lds("Target 7.5h",Array(DATA.length).fill(7.5),"rgba(42,144,80,0.5)",true)]},options:bO(2,10,"hours")});
-new Chart(document.getElementById("wChart"),{type:"line",data:{labels,datasets:[lds("Weight",DATA.map(d=>d.weight),"#2a9050"),lds("Start 59kg",Array(DATA.length).fill(59),"rgba(224,128,32,0.4)",true)]},options:bO(57,62,"kg")});
-new Chart(document.getElementById("ssChart"),{type:"line",data:{labels,datasets:[
-  {label:"Deep",data:DATA.map(d=>d.sleep?d.sleep.deepH:null),borderColor:"#4060c8",backgroundColor:"rgba(64,96,200,0.1)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#4060c8",spanGaps:true},
-  {label:"REM",data:DATA.map(d=>d.sleep?d.sleep.remH:null),borderColor:"#7da4e8",backgroundColor:"rgba(125,164,232,0.08)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#7da4e8",spanGaps:true},
-  {label:"Light",data:DATA.map(d=>d.sleep?d.sleep.lightH:null),borderColor:"#38abe4",backgroundColor:"rgba(56,171,228,0.06)",fill:true,tension:0.35,borderWidth:2,pointRadius:4,pointBackgroundColor:"#38abe4",spanGaps:true}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:9,padding:8}}},scales:{y:{min:0,max:6,title:{display:true,text:"hours"},grid:{color:"rgba(56,171,228,0.07)"}},x:{grid:{color:"rgba(56,171,228,0.07)"}}}}});
+
+// Point color helper — green if at/above target, red if below
+function ptColors(values, target, threshold=0.9){
+  return values.map(v=>v===null?'transparent':v>=target*threshold?GREEN:RED);
+}
+
+// Band plugin — draws a shaded target range band
+function bandPlugin(yMin, yMax, color='rgba(42,144,80,0.08)'){
+  return {
+    id:'band',
+    beforeDraw(chart){
+      const {ctx,chartArea,scales}=chart;
+      if(!chartArea) return;
+      const y1=scales.y.getPixelForValue(yMax);
+      const y2=scales.y.getPixelForValue(yMin);
+      ctx.save();
+      ctx.fillStyle=color;
+      ctx.fillRect(chartArea.left,y1,chartArea.right-chartArea.left,y2-y1);
+      ctx.restore();
+    }
+  };
+}
+
+const baseOpts=(mn,mx,u,plugins=[])=>({
+  responsive:true, maintainAspectRatio:false,
+  plugins:{
+    legend:{display:false},
+    tooltip:{
+      backgroundColor:'rgba(255,255,255,0.95)',
+      titleColor:'#1a2a3a',
+      bodyColor:'#3a5a7a',
+      borderColor:'rgba(56,171,228,0.2)',
+      borderWidth:1,
+      padding:10,
+      titleFont:{family:'DM Mono, monospace',size:11},
+      bodyFont:{family:'DM Mono, monospace',size:11},
+    },
+    ...plugins
+  },
+  scales:{
+    y:{min:mn,max:mx,
+       title:{display:!!u,text:u,font:{family:'DM Mono, monospace',size:10}},
+       grid:{color:'rgba(56,171,228,0.07)'},
+       ticks:{font:{family:'DM Mono, monospace',size:10}}},
+    x:{grid:{color:'rgba(56,171,228,0.07)'},
+       ticks:{font:{family:'DM Mono, monospace',size:10}}}
+  }
+});
+
+// 1. CALORIES
+const calVals = DATA.map(d=>d.calories);
+const calColors = ptColors(calVals, T.cal);
+new Chart(document.getElementById("cChart"),{
+  type:"line",
+  plugins:[bandPlugin(T.cal*0.9, T.cal*1.05)],
+  data:{labels, datasets:[
+    {data:calVals, borderColor:SKY, backgroundColor:'rgba(56,171,228,0.08)',
+     fill:true, tension:0.35, borderWidth:2.5, pointRadius:6,
+     pointBackgroundColor:calColors, pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {data:Array(DATA.length).fill(T.cal), borderColor:'rgba(42,144,80,0.45)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
+  ]},
+  options:baseOpts(1500,3000,"kcal")
+});
+
+// 2. PROTEIN
+const protVals = DATA.map(d=>d.protein);
+const protColors = ptColors(protVals, T.prot, 0.93);
+new Chart(document.getElementById("pChart"),{
+  type:"line",
+  plugins:[bandPlugin(T.prot*0.93, T.prot*1.1)],
+  data:{labels, datasets:[
+    {data:protVals, borderColor:PERI, backgroundColor:'rgba(125,164,232,0.08)',
+     fill:true, tension:0.35, borderWidth:2.5, pointRadius:6,
+     pointBackgroundColor:protColors, pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {data:Array(DATA.length).fill(T.prot), borderColor:'rgba(42,144,80,0.45)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
+  ]},
+  options:baseOpts(100,230,"g")
+});
+
+// 3. CARBS & FAT — two lines with range bands
+new Chart(document.getElementById("cfChart"),{
+  type:"line",
+  plugins:[bandPlugin(T.carbs*0.8, T.carbs,'rgba(91,168,212,0.07)'),
+           bandPlugin(T.fat*0.8, T.fat*1.15,'rgba(72,136,196,0.06)')],
+  data:{labels, datasets:[
+    {label:"Carbs", data:DATA.map(d=>d.carbs), borderColor:STEEL,
+     backgroundColor:'rgba(91,168,212,0.06)', fill:true, tension:0.35, borderWidth:2.5,
+     pointRadius:5, pointBackgroundColor:DATA.map(d=>d.carbs>=T.carbs*0.8?STEEL:RED),
+     pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {data:Array(DATA.length).fill(T.carbs), borderColor:'rgba(91,168,212,0.4)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false},
+    {label:"Fat", data:DATA.map(d=>d.fat), borderColor:BLUE,
+     backgroundColor:'rgba(72,136,196,0.05)', fill:true, tension:0.35, borderWidth:2.5,
+     pointRadius:5, pointBackgroundColor:DATA.map(d=>d.fat>=T.fat*0.8?BLUE:RED),
+     pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {data:Array(DATA.length).fill(T.fat), borderColor:'rgba(72,136,196,0.4)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
+  ]},
+  options:{...baseOpts(0,330,"g"), plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(255,255,255,0.95)',titleColor:'#1a2a3a',bodyColor:'#3a5a7a',borderColor:'rgba(56,171,228,0.2)',borderWidth:1,padding:10,titleFont:{family:'DM Mono, monospace',size:11},bodyFont:{family:'DM Mono, monospace',size:11}}}}
+});
+
+// 4. SLEEP DURATION
+const slpVals = DATA.map(d=>d.sleep?d.sleep.dH:null);
+const slpColors = slpVals.map(v=>v===null?'transparent':v>=T.sleep?GREEN:v>=6?ORANGE:RED);
+new Chart(document.getElementById("slChart"),{
+  type:"line",
+  plugins:[bandPlugin(7, 8.5,'rgba(42,144,80,0.1)')],
+  data:{labels, datasets:[
+    {data:slpVals, borderColor:SKY, backgroundColor:'rgba(56,171,228,0.07)',
+     fill:true, tension:0.35, borderWidth:2.5, pointRadius:7,
+     pointBackgroundColor:slpColors, pointBorderColor:'white', pointBorderWidth:2, spanGaps:true},
+    {data:Array(DATA.length).fill(T.sleep), borderColor:'rgba(42,144,80,0.45)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
+  ]},
+  options:baseOpts(2,10.5,"hours")
+});
+
+// 5. WEIGHT
+const wtVals = DATA.map(d=>d.weight);
+const wtColors = wtVals.map((v,i)=>{
+  if(v===null) return 'transparent';
+  if(i===0) return SKY;
+  const prev=DATA.slice(0,i).reverse().find(d=>d.weight!==null);
+  return prev&&v>prev.weight?GREEN:prev&&v<prev.weight?RED:ORANGE;
+});
+new Chart(document.getElementById("wChart"),{
+  type:"line",
+  plugins:[bandPlugin(58.9,60,'rgba(42,144,80,0.07)')],
+  data:{labels, datasets:[
+    {data:wtVals, borderColor:GREEN, backgroundColor:'rgba(42,144,80,0.07)',
+     fill:true, tension:0.35, borderWidth:2.5, pointRadius:6,
+     pointBackgroundColor:wtColors, pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {data:Array(DATA.length).fill(59), borderColor:'rgba(224,128,32,0.4)',
+     borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
+  ]},
+  options:baseOpts(57,62,"kg")
+});
+
+// 6. SLEEP STAGES — stacked area
+new Chart(document.getElementById("ssChart"),{
+  type:"line",
+  data:{labels, datasets:[
+    {label:"Deep", data:DATA.map(d=>d.sleep?d.sleep.deepH:null),
+     borderColor:"#4060c8", backgroundColor:"rgba(64,96,200,0.18)",
+     fill:true, tension:0.35, borderWidth:2, pointRadius:5,
+     pointBackgroundColor:"#4060c8", pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {label:"REM", data:DATA.map(d=>d.sleep?d.sleep.remH:null),
+     borderColor:"#7da4e8", backgroundColor:"rgba(125,164,232,0.12)",
+     fill:true, tension:0.35, borderWidth:2, pointRadius:5,
+     pointBackgroundColor:"#7da4e8", pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true},
+    {label:"Light", data:DATA.map(d=>d.sleep?d.sleep.lightH:null),
+     borderColor:"#38abe4", backgroundColor:"rgba(56,171,228,0.07)",
+     fill:true, tension:0.35, borderWidth:2, pointRadius:5,
+     pointBackgroundColor:"#38abe4", pointBorderColor:'white', pointBorderWidth:1.5, spanGaps:true}
+  ]},
+  options:baseOpts(0,7,"hours")
+});
 </script>
 </body>
 </html>
