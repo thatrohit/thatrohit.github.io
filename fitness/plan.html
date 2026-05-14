@@ -136,6 +136,32 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
   .macro-grid{grid-template-columns:1fr;}
 }
 </style>
+
+<style>
+.meal-section { font-family: 'DM Sans', sans-serif !important; }
+.meal-section * { font-family: 'DM Sans', sans-serif !important; }
+.meal-section .meal-label,
+.meal-section .meal-clock,
+.meal-section .meal-kcal,
+.meal-section h2 { font-family: 'DM Mono', monospace !important; }
+.meal-section .section-title { font-family: 'DM Mono', monospace !important; }
+.meal-card { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.85); box-shadow: 0 2px 12px rgba(56,171,228,0.08); }
+.meal-time { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.meal-label { font-family: 'DM Mono', monospace !important; font-size: 13px; font-weight: 700; color: #38abe4; text-transform: uppercase; letter-spacing: 1px; }
+.meal-clock { font-size: 11px; color: rgba(26,58,82,0.5); }
+.meal-kcal { font-size: 11px; color: rgba(26,58,82,0.4); margin-left: auto; }
+.meal-items { display: flex; flex-direction: column; gap: 8px; }
+.meal-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(56,171,228,0.08); }
+.meal-item:last-child { border-bottom: none; padding-bottom: 0; }
+.meal-name { font-size: 13px; color: #1a3a52; font-weight: 500; flex: 1; }
+.meal-macro { font-family: 'DM Mono', monospace !important; font-size: 11px; color: #38abe4; text-align: right; white-space: nowrap; }
+.meal-note { font-size: 11px; color: #f97316; font-style: italic; border-bottom: none !important; }
+.meal-intro { font-size: 13px; color: rgba(26,58,82,0.6); margin-bottom: 20px; line-height: 1.6; }
+.meal-intro strong { color: #1a3a52; }
+.meal-section h2.section-title { font-size: 20px; font-weight: 700; color: #1a3a52; margin-bottom: 8px; }
+.meal-card.highlight { border-left: 3px solid #38abe4; }
+.meal-card.bedtime { border-left: 3px solid #a78bfa; }
+</style>
 </head>
 <body>
 <div class="topnav">
