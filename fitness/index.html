@@ -36,7 +36,7 @@ const DATA = [
   {day:"DAY 10",date:"2026-05-12",label:"Tue, May 12",workout:"Pull · Strength",calories:2632,protein:172,carbs:231,fat:107,weight:59.2,sleep:{duration:"6h 58m",dH:6.97,score:84,bed:"10:28 PM",wake:"5:26 AM",deepH:1.18,remH:1.63,lightH:3.87,awakeH:0,deep:"1h 11m",rem:"1h 38m",light:"3h 52m",awake:"0m"}},
   {day:"DAY 11",date:"2026-05-13",label:"Wed, May 13",workout:"Legs",calories:2158,protein:215,carbs:199,fat:53,weight:59.2,sleep:{duration:"8h 34m",dH:8.57,score:90,bed:"8:43 PM",wake:"5:22 AM",deepH:1.95,remH:1.72,lightH:4.67,awakeH:0.08,deep:"1h 57m",rem:"1h 43m",light:"4h 40m",awake:"5m"}},
 ];
-const T={cal:2650,prot:180,carbs:290,fat:86,sleep:7.5};
+const T={cal:2330,prot:170,carbs:240,fat:75,sleep:7.5};
 </script>
 <style>
 :root{
@@ -189,16 +189,16 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
     <div class="hero-stats">
       <div class="sbox"><div class="sbox-l">Weight</div><div class="sbox-v" id="heroWeight">—</div><div class="sbox-u">KG · latest</div></div>
       <div class="sbox"><div class="sbox-l">Body Fat</div><div class="sbox-v">~20%</div><div class="sbox-u">Starting BF</div></div>
-      <div class="sbox"><div class="sbox-l">Target</div><div class="sbox-v">2,650</div><div class="sbox-u">kcal / day</div></div>
+      <div class="sbox"><div class="sbox-l">Target</div><div class="sbox-v">2,330</div><div class="sbox-u">kcal / day</div></div>
       <div class="sbox"><div class="sbox-l">Goal</div><div class="sbox-v" style="font-size:1rem;line-height:1.2">LEAN<br>BULK</div><div class="sbox-u">+250 kcal surplus</div></div>
     </div>
   </div>
 </div>
 <div class="tbar">
   <div class="tbar-inner">
-    <div class="ti"><div class="ti-l">Protein</div><div class="ti-v">180g</div></div><div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Carbs</div><div class="ti-v">290g</div></div><div class="tdiv"></div>
-    <div class="ti"><div class="ti-l">Fat</div><div class="ti-v">86g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Protein</div><div class="ti-v">170g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Carbs</div><div class="ti-v">240g</div></div><div class="tdiv"></div>
+    <div class="ti"><div class="ti-l">Fat</div><div class="ti-v">75g</div></div><div class="tdiv"></div>
     <div class="ti"><div class="ti-l">Sleep</div><div class="ti-v">7–8 hrs</div></div><div class="tdiv"></div>
     <div class="ti"><div class="ti-l">Weight gain</div><div class="ti-v">+0.3/wk</div></div><div class="tdiv"></div>
     <div class="ti"><div class="ti-l">Training</div><div class="ti-v">Mon–Sat</div></div>
@@ -255,7 +255,7 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 </div>
-<div class="footer"><strong>ROHIT</strong> · Lean Bulk · Week 1 Complete · 2,650 kcal · 180g P · 290g C · 86g F</div>
+<div class="footer"><strong>ROHIT</strong> · Lean Bulk · Week 1 Complete · 2,330 kcal · 170g P · 240g C · 75g F</div>
 <div class="overlay" id="overlay" onclick="overlayClick(event)">
   <div class="modal">
     <div class="modal-head">
@@ -322,8 +322,8 @@ document.getElementById("dayNum").textContent=DATA.length;
   const ws=DATA.filter(d=>d.weight!==null).map(d=>d.weight);
   const wD=ws.length>=2?(ws[ws.length-1]-ws[0]).toFixed(1):null;
   document.getElementById("summaryRow").innerHTML=`
-    <div class="sumbox"><div class="sumbox-l">Avg Calories</div><div class="sumbox-v c-k">${aC.toLocaleString()}</div><div class="sumbox-s">Target 2,650</div></div>
-    <div class="sumbox"><div class="sumbox-l">Avg Protein</div><div class="sumbox-v c-p">${aP}g</div><div class="sumbox-s">Target 180g</div></div>
+    <div class="sumbox"><div class="sumbox-l">Avg Calories</div><div class="sumbox-v c-k">${aC.toLocaleString()}</div><div class="sumbox-s">Target 2,330</div></div>
+    <div class="sumbox"><div class="sumbox-l">Avg Protein</div><div class="sumbox-v c-p">${aP}g</div><div class="sumbox-s">Target 170g</div></div>
     <div class="sumbox"><div class="sumbox-l">Avg Sleep</div><div class="sumbox-v" style="color:var(--sky)">${aS} hrs</div><div class="sumbox-s">Target 7.5 hrs</div></div>
     <div class="sumbox"><div class="sumbox-l">Weight Δ</div><div class="sumbox-v" style="color:${wD===null?'var(--text-soft)':wD>=0?'var(--green)':'var(--red)'}">
       ${wD===null?"—":(wD>=0?"+":"")+wD+" kg"}</div><div class="sumbox-s">Since Day 1</div></div>`;})();
