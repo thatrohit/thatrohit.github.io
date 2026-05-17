@@ -3,7 +3,7 @@
     "name": "Rohit",
     "age": 38,
     "height": "5'8\"",
-    "startWeight": 59,
+    "startWeight": 58.1,
     "bodyFat": 20,
     "goal": "Lean Bulk",
     "gym": "Synergyfit",
@@ -497,6 +497,112 @@
           "label": "5m"
         }
       }
+    },
+    {
+      "day": 15,
+      "date": "2026-05-17",
+      "label": "Sun, May 17",
+      "workout": "Travel — No Gym",
+      "calories": 470,
+      "protein": 32,
+      "carbs": 50,
+      "fat": 16,
+      "weight": null,
+      "sleep": {
+        "duration": "7h 17m",
+        "hours": 7.28,
+        "score": 87,
+        "bed": "11:38 PM",
+        "wake": "6:59 AM",
+        "deep": {
+          "hours": 1.03,
+          "label": "1h 2m"
+        },
+        "rem": {
+          "hours": 1.53,
+          "label": "1h 32m"
+        },
+        "light": {
+          "hours": 4.6,
+          "label": "4h 36m"
+        },
+        "awake": {
+          "hours": 0.07,
+          "label": "4m"
+        }
+      }
+    },
+    {
+      "day": 16,
+      "date": "2026-05-18",
+      "label": "Mon, May 18",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
+    },
+    {
+      "day": 17,
+      "date": "2026-05-19",
+      "label": "Tue, May 19",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
+    },
+    {
+      "day": 18,
+      "date": "2026-05-20",
+      "label": "Wed, May 20",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
+    },
+    {
+      "day": 19,
+      "date": "2026-05-21",
+      "label": "Thu, May 21",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
+    },
+    {
+      "day": 20,
+      "date": "2026-05-22",
+      "label": "Fri, May 22",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
+    },
+    {
+      "day": 21,
+      "date": "2026-05-23",
+      "label": "Sat, May 23",
+      "workout": "Travel — No Gym",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": null,
+      "sleep": null
     }
   ]
 }
