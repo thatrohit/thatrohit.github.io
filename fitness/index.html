@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rohit — Lean Bulk Tracker</title>
 <link rel="stylesheet" href="/fitness/css/theme.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 window.HEADER_CONFIG = {
   title: 'Progress Tracker',
@@ -17,256 +18,97 @@ window.HEADER_CONFIG = {
 };
 </script>
 <style>
-/* ── PAGE-SPECIFIC STYLES ── */
-
-/* Stats grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 16px 20px;
-}
-.stat-card {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  border-radius: var(--r-lg);
-  padding: 16px 14px;
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-sm);
-}
-.stat-value {
-  font-family: var(--font-mono);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--navy);
-  line-height: 1;
-  margin-bottom: 3px;
-}
-.stat-unit { font-size: 14px; font-weight: 400; }
-.stat-label { font-size: 11px; color: rgba(26,58,82,0.5); }
-.stat-sub { font-size: 10px; color: rgba(26,58,82,0.4); margin-top: 2px; }
-
-/* Target macros */
+/* ── MACRO TARGETS ── */
 .macros-row {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 8px;
-  padding: 0 20px 16px;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 8px; padding: 0 20px 16px;
 }
 .macro-card {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  border-radius: var(--r-md);
-  padding: 12px 8px;
-  border: 1px solid var(--glass-border);
-  text-align: center;
+  background: var(--glass); backdrop-filter: blur(10px);
+  border-radius: var(--r-md); padding: 12px 8px;
+  border: 1px solid var(--glass-border); text-align: center;
 }
-.macro-val {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--sky);
-}
+.macro-val { font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--sky); }
 .macro-label { font-size: 10px; color: rgba(26,58,82,0.5); margin-top: 2px; }
 
-/* Today card */
+/* ── TODAY CARD ── */
 .today-card {
   margin: 0 20px 16px;
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  border-radius: var(--r-xl);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
+  background: var(--glass); backdrop-filter: blur(16px);
+  border-radius: var(--r-xl); border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md); overflow: hidden;
 }
 .today-header {
   padding: 14px 18px 12px;
   border-bottom: 1px solid rgba(56,171,228,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.today-date {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--sky);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.today-workout {
-  font-size: 13px;
-  color: var(--navy);
-  font-weight: 600;
-}
+.today-date { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--sky); text-transform: uppercase; letter-spacing: 1px; }
 .today-body { padding: 14px 18px; }
-.today-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.today-row:last-child { margin-bottom: 0; }
-.today-row-label { font-size: 12px; color: rgba(26,58,82,0.5); }
-.today-row-val {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--navy);
-}
-.progress-bar-wrap {
-  height: 6px;
-  background: rgba(56,171,228,0.12);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-.progress-bar {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.6s var(--ease);
-}
-.bar-green { background: #22c55e; }
-.bar-orange { background: #f97316; }
-.bar-red { background: #ef4444; }
-.bar-blue { background: var(--sky); }
+.macro-bar-row { margin-bottom: 12px; }
+.macro-bar-row:last-child { margin-bottom: 0; }
+.macro-bar-top { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.macro-bar-label { font-size: 12px; color: rgba(26,58,82,0.55); }
+.macro-bar-val { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--navy); }
+.pbar { height: 7px; background: rgba(56,171,228,0.1); border-radius: 4px; overflow: hidden; }
+.pbar-fill { height: 100%; border-radius: 4px; transition: width 0.7s var(--ease); }
+.fill-green  { background: linear-gradient(90deg, #22c55e, #16a34a); }
+.fill-blue   { background: linear-gradient(90deg, #38abe4, #7da4e8); }
+.fill-orange { background: linear-gradient(90deg, #f97316, #fb923c); }
+.fill-red    { background: linear-gradient(90deg, #ef4444, #f87171); }
 
-.in-progress {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: rgba(26,58,82,0.4);
-  padding: 8px 0;
-  text-align: center;
-}
-
-/* Sleep card in today */
-.sleep-mini {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 6px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(56,171,228,0.08);
-}
+/* ── SLEEP MINI ── */
+.sleep-mini { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(56,171,228,0.08); }
 .sleep-mini-item { text-align: center; }
-.sleep-mini-val {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-}
+.sleep-mini-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--navy); }
 .sleep-mini-label { font-size: 9px; color: rgba(26,58,82,0.4); margin-top: 1px; }
 
-/* Charts section */
-.chart-section {
-  padding: 0 20px 16px;
-}
+/* ── CHART SECTION ── */
+.chart-section { padding: 0 20px 16px; }
 .chart-card {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  border-radius: var(--r-xl);
-  border: 1px solid var(--glass-border);
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-sm);
+  background: var(--glass); backdrop-filter: blur(10px);
+  border-radius: var(--r-xl); border: 1px solid var(--glass-border);
+  padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm);
 }
 .chart-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--sky);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--sky); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 14px;
 }
-.chart-legend {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  color: rgba(26,58,82,0.5);
-}
-.legend-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  flex-shrink: 0;
-}
-svg.chart { width: 100%; overflow: visible; }
+.chart-wrap { position: relative; height: 160px; }
 
-/* Day log calendar */
-.log-grid {
-  display: grid;
-  grid-template-columns: repeat(7,1fr);
-  gap: 4px;
-  padding: 0 20px 20px;
-}
-.log-day {
-  aspect-ratio: 1;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-}
-.log-day.has-data { background: rgba(56,171,228,0.15); color: var(--sky); border-color: rgba(56,171,228,0.2); }
-.log-day.has-data:hover { background: rgba(56,171,228,0.25); }
-.log-day.in-progress { background: rgba(249,115,22,0.1); color: var(--push); border-color: rgba(249,115,22,0.2); }
-.log-day.empty { background: rgba(26,58,82,0.04); color: rgba(26,58,82,0.2); }
-.log-day.rest { background: rgba(167,139,250,0.1); color: var(--rest); }
-
-/* Week averages */
-.avg-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(56,171,228,0.08);
-}
+/* ── WEEK AVG ── */
+.avg-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(56,171,228,0.08); }
 .avg-row:last-child { border-bottom: none; }
-.avg-label { font-size: 12px; color: rgba(26,58,82,0.6); }
-.avg-val {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-}
+.avg-label { font-size: 12px; color: rgba(26,58,82,0.55); }
+.avg-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--navy); }
 
-/* Score badge */
-.score-badge {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 10px;
-}
+/* ── SCORE BADGE ── */
+.score-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 10px; }
 .score-great { background: rgba(34,197,94,0.12); color: #22c55e; }
 .score-good  { background: rgba(56,171,228,0.12); color: var(--sky); }
 .score-ok    { background: rgba(249,115,22,0.12); color: var(--push); }
 .score-low   { background: rgba(239,68,68,0.12); color: #ef4444; }
+
+/* ── LOG LIST ── */
+.log-item {
+  background: var(--glass); backdrop-filter: blur(10px);
+  border-radius: var(--r-lg); padding: 14px 16px;
+  margin-bottom: 8px; border: 1px solid var(--glass-border);
+}
+.log-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.log-macro-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+.log-macro { text-align: center; background: rgba(56,171,228,0.06); border-radius: 8px; padding: 6px 4px; }
+.log-macro-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+.log-macro-label { font-size: 9px; color: rgba(26,58,82,0.4); }
+
+.in-progress { font-family: var(--font-mono); font-size: 12px; color: rgba(26,58,82,0.4); padding: 8px 0; text-align: center; }
 </style>
 </head>
 <body>
 
-<!-- Shared header injected here -->
 <div id="app-header"></div>
 
-<!-- Tab bar -->
 <div class="tab-bar">
   <button class="tab active" onclick="showTab('macros',this)">Macros</button>
   <button class="tab" onclick="showTab('sleep',this)">Sleep</button>
@@ -274,7 +116,6 @@ svg.chart { width: 100%; overflow: visible; }
   <button class="tab" onclick="showTab('log',this)">Log</button>
 </div>
 
-<!-- Dynamic content -->
 <div id="tab-macros"></div>
 <div id="tab-sleep" style="display:none"></div>
 <div id="tab-weight" style="display:none"></div>
@@ -285,8 +126,13 @@ svg.chart { width: 100%; overflow: visible; }
 <script src="/fitness/components/header.js"></script>
 <script>
 let DATA = null;
+const charts = {};
 
-// ── LOAD DATA ──────────────────────────────────────────────────────
+// ── CHART.JS DEFAULTS ─────────────────────────────────────────────
+Chart.defaults.font.family = "'DM Mono', monospace";
+Chart.defaults.color = 'rgba(26,58,82,0.45)';
+
+// ── LOAD ──────────────────────────────────────────────────────────
 async function loadData() {
   try {
     const r = await fetch('/fitness/data/log.json?v=' + Date.now());
@@ -295,146 +141,133 @@ async function loadData() {
     render();
   } catch(e) {
     document.getElementById('tab-macros').innerHTML =
-      `<div style="padding:40px 20px;text-align:center;font-family:var(--font-mono);color:var(--sky);">
-        ⚠️ Could not load data<br><small style="color:rgba(26,58,82,0.4)">${e.message}</small>
-      </div>`;
+      `<div style="padding:40px 20px;text-align:center;font-family:var(--font-mono);color:var(--sky)">⚠️ ${e.message}</div>`;
   }
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────
-function pct(val, target) { return Math.min(100, Math.round((val||0) / target * 100)); }
-function scoreClass(s) {
-  if(s >= 90) return 'score-great';
-  if(s >= 80) return 'score-good';
-  if(s >= 70) return 'score-ok';
-  return 'score-low';
-}
-function dotColor(val, target, tol=0.9) {
-  if(val === null) return '#ccc';
-  const r = val/target;
-  if(r >= tol) return '#22c55e';
-  if(r >= 0.75) return '#f97316';
-  return '#ef4444';
-}
-function avg(arr) { const f=arr.filter(v=>v!==null&&v!==undefined); return f.length?f.reduce((a,b)=>a+b,0)/f.length:null; }
+function pct(v,t){ return Math.min(100,Math.round((v||0)/t*100)); }
+function scoreClass(s){ return s>=90?'score-great':s>=80?'score-good':s>=70?'score-ok':'score-low'; }
+function dotColor(v,t){ if(v===null)return'#ccc'; const r=v/t; return r>=0.9?'#22c55e':r>=0.75?'#f97316':'#ef4444'; }
+function avg(arr){ const f=arr.filter(v=>v!=null); return f.length?f.reduce((a,b)=>a+b,0)/f.length:null; }
+function shortLabel(d){ return d.label?.split(',')[0]||d.date?.slice(5)||''; }
 
-// ── CHART BUILDER ─────────────────────────────────────────────────
-function buildLineChart(days, getValue, target, color, targetColor='rgba(56,171,228,0.3)') {
-  const W = 320, H = 80, PAD = 12;
-  const vals = days.map(getValue);
-  const nonNull = vals.filter(v=>v!==null);
-  if(!nonNull.length) return '<p class="in-progress">No data yet</p>';
+function destroyChart(id){ if(charts[id]){ charts[id].destroy(); delete charts[id]; } }
 
-  const maxV = Math.max(...nonNull, target) * 1.15;
-  const minV = Math.min(...nonNull, target) * 0.85;
-  const range = maxV - minV || 1;
+// ── CHART BUILDERS ────────────────────────────────────────────────
 
-  const xs = days.map((_,i) => PAD + i * (W - PAD*2) / Math.max(days.length-1,1));
-  const ys = vals.map(v => v===null ? null : H - PAD - (v - minV) / range * (H - PAD*2));
-  const targetY = H - PAD - (target - minV) / range * (H - PAD*2);
+function makeLineChart(canvasId, labels, datasets, opts={}) {
+  destroyChart(canvasId);
+  const ctx = document.getElementById(canvasId)?.getContext('2d');
+  if(!ctx) return;
 
-  // Shaded band around target ±10%
-  const bandTop = H - PAD - (target*1.1 - minV) / range * (H - PAD*2);
-  const bandBot = H - PAD - (target*0.9 - minV) / range * (H - PAD*2);
-
-  // Line path (skip nulls)
-  let path = '';
-  vals.forEach((v,i) => {
-    if(v===null) return;
-    path += (path===''?'M':'L') + `${xs[i].toFixed(1)},${ys[i].toFixed(1)}`;
+  charts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: datasets.length > 1,
+          position: 'top',
+          labels: { boxWidth: 10, padding: 8, font: { size: 10 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y + (opts.unit||'') : '—'}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(56,171,228,0.06)' },
+          ticks: { font: { size: 9 }, maxRotation: 0, maxTicksLimit: 7 }
+        },
+        y: {
+          min: opts.yMin,
+          max: opts.yMax,
+          grid: { color: 'rgba(56,171,228,0.08)' },
+          ticks: { font: { size: 9 }, maxTicksLimit: 5,
+            callback: v => v + (opts.unit||'')
+          }
+        },
+        ...(opts.y2 ? {
+          y2: {
+            position: 'right',
+            min: opts.y2Min, max: opts.y2Max,
+            grid: { drawOnChartArea: false },
+            ticks: { font: { size: 9 }, maxTicksLimit: 4, callback: v => v + (opts.y2unit||'') }
+          }
+        } : {})
+      },
+      ...( opts.annotations ? { plugins: { annotation: opts.annotations } } : {} )
+    }
   });
+}
 
-  // Dots
-  const dots = vals.map((v,i) => v===null?'' :
-    `<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="4"
-      fill="${dotColor(v,target)}" stroke="white" stroke-width="2"/>`
-  ).join('');
-
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-    <!-- Target band -->
-    <rect x="${PAD}" y="${Math.min(bandTop,bandBot).toFixed(1)}"
-      width="${W-PAD*2}" height="${Math.abs(bandBot-bandTop).toFixed(1)}"
-      fill="${targetColor}" rx="2"/>
-    <!-- Target line -->
-    <line x1="${PAD}" y1="${targetY.toFixed(1)}" x2="${W-PAD}" y2="${targetY.toFixed(1)}"
-      stroke="${color}" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.6"/>
-    <!-- Data line -->
-    ${path ? `<path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : ''}
-    <!-- Dots -->
-    ${dots}
-  </svg>`;
+function targetLine(value, color='rgba(56,171,228,0.5)') {
+  return {
+    type: 'line',
+    yMin: value, yMax: value,
+    borderColor: color,
+    borderWidth: 1.5,
+    borderDash: [5,5],
+    label: { display: false }
+  };
 }
 
 // ── TAB: MACROS ───────────────────────────────────────────────────
 function renderMacros() {
   const T = DATA.targets;
   const days = DATA.days;
-  const last = [...days].reverse().find(d => d.calories !== null) || days[days.length-1];
-  const isToday = last === days[days.length-1];
-
-  // Stats
-  const weekDays = days.slice(-7);
-  const avgCal = avg(weekDays.map(d=>d.calories));
-  const avgProt = avg(weekDays.map(d=>d.protein));
+  const last = [...days].reverse().find(d=>d.calories!==null) || days[days.length-1];
+  const w7 = days.slice(-7);
 
   let html = `
-  <!-- Target macros -->
   <div class="section"><div class="section-label">Daily Targets</div></div>
   <div class="macros-row">
-    <div class="macro-card">
-      <div class="macro-val">${T.calories}</div>
-      <div class="macro-label">kcal/day</div>
-    </div>
-    <div class="macro-card">
-      <div class="macro-val">${T.protein}g</div>
-      <div class="macro-label">protein</div>
-    </div>
-    <div class="macro-card">
-      <div class="macro-val">${T.carbs}g</div>
-      <div class="macro-label">carbs</div>
-    </div>
-    <div class="macro-card">
-      <div class="macro-val">${T.fat}g</div>
-      <div class="macro-label">fat</div>
-    </div>
+    <div class="macro-card"><div class="macro-val">${T.calories}</div><div class="macro-label">kcal</div></div>
+    <div class="macro-card"><div class="macro-val">${T.protein}g</div><div class="macro-label">protein</div></div>
+    <div class="macro-card"><div class="macro-val">${T.carbs}g</div><div class="macro-label">carbs</div></div>
+    <div class="macro-card"><div class="macro-val">${T.fat}g</div><div class="macro-label">fat</div></div>
   </div>
 
-  <!-- Today / Last logged -->
-  <div class="section"><div class="section-label">${isToday?'Today':'Last Logged'} — ${last.label||last.date}</div></div>
+  <div class="section"><div class="section-label">Day ${last.day} — ${last.label||last.date}</div></div>
   <div class="today-card">
     <div class="today-header">
-      <span class="today-date">Day ${last.day} · ${last.workout||'—'}</span>
-      ${last.weight ? `<span class="today-row-val">${last.weight} kg</span>` : ''}
+      <span class="today-date">${last.workout||'—'}</span>
+      ${last.weight?`<span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--navy)">${last.weight} kg</span>`:''}
     </div>
     <div class="today-body">`;
 
-  if(last.calories === null) {
+  if(last.calories===null) {
     html += `<div class="in-progress">⏳ Logging in progress...</div>`;
   } else {
-    const macros = [
-      { label:'Calories', val:last.calories, target:T.calories, unit:'kcal', color:'bar-blue' },
-      { label:'Protein',  val:last.protein,  target:T.protein,  unit:'g',    color:'bar-green' },
-      { label:'Carbs',    val:last.carbs,    target:T.carbs,    unit:'g',    color:'bar-blue' },
-      { label:'Fat',      val:last.fat,      target:T.fat,      unit:'g',    color:'bar-orange' },
+    const bars = [
+      {l:'Calories',v:last.calories,t:T.calories,u:'kcal'},
+      {l:'Protein', v:last.protein, t:T.protein, u:'g'},
+      {l:'Carbs',   v:last.carbs,   t:T.carbs,   u:'g'},
+      {l:'Fat',     v:last.fat,     t:T.fat,      u:'g'},
     ];
-    html += macros.map(m => {
-      const p = pct(m.val, m.target);
-      const barColor = p>=90?'bar-green':p>=75?'bar-orange':'bar-red';
-      return `<div class="today-row" style="flex-direction:column;align-items:stretch;margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-          <span class="today-row-label">${m.label}</span>
-          <span class="today-row-val">${m.val}${m.unit} <span style="font-size:10px;color:rgba(26,58,82,0.4)">/ ${m.target}${m.unit}</span></span>
+    bars.forEach(b => {
+      const p = pct(b.v, b.t);
+      const cls = p>=90?'fill-green':p>=75?'fill-orange':'fill-red';
+      html += `<div class="macro-bar-row">
+        <div class="macro-bar-top">
+          <span class="macro-bar-label">${b.l}</span>
+          <span class="macro-bar-val">${b.v}${b.u} <span style="font-size:10px;opacity:0.4">/ ${b.t}${b.u}</span></span>
         </div>
-        <div class="progress-bar-wrap"><div class="progress-bar ${barColor}" style="width:${p}%"></div></div>
+        <div class="pbar"><div class="pbar-fill ${cls}" style="width:${p}%"></div></div>
       </div>`;
-    }).join('');
+    });
   }
 
-  // Sleep mini
   if(last.sleep) {
     const s = last.sleep;
     html += `<div class="sleep-mini">
-      <div class="sleep-mini-item"><div class="sleep-mini-val">${s.duration}</div><div class="sleep-mini-label">Duration</div></div>
+      <div class="sleep-mini-item"><div class="sleep-mini-val">${s.duration}</div><div class="sleep-mini-label">Total</div></div>
       <div class="sleep-mini-item"><div class="sleep-mini-val">${s.score}</div><div class="sleep-mini-label">Score</div></div>
       <div class="sleep-mini-item"><div class="sleep-mini-val">${s.deep?.label||'—'}</div><div class="sleep-mini-label">Deep</div></div>
       <div class="sleep-mini-item"><div class="sleep-mini-val">${s.rem?.label||'—'}</div><div class="sleep-mini-label">REM</div></div>
@@ -444,119 +277,280 @@ function renderMacros() {
   html += `</div></div>`;
 
   // Week averages
+  const avgCal = avg(w7.map(d=>d.calories));
+  const avgProt = avg(w7.map(d=>d.protein));
+  const avgSleep = avg(w7.map(d=>d.sleep?.score||null));
+  const wts = w7.filter(d=>d.weight);
+  const wtTrend = wts.length>=2 ? (wts[wts.length-1].weight - wts[0].weight) : null;
+
   html += `
   <div class="section"><div class="section-label">Week Average (Last 7 Days)</div></div>
   <div class="today-card" style="margin:0 20px 16px">
     <div class="today-body">
       <div class="avg-row"><span class="avg-label">Calories</span><span class="avg-val">${avgCal?Math.round(avgCal)+' kcal':'—'}</span></div>
       <div class="avg-row"><span class="avg-label">Protein</span><span class="avg-val">${avgProt?Math.round(avgProt)+'g':'—'}</span></div>
-      <div class="avg-row"><span class="avg-label">Avg sleep score</span><span class="avg-val">${(()=>{const s=avg(weekDays.map(d=>d.sleep?.score||null));return s?Math.round(s):'—'})()}</span></div>
-      <div class="avg-row"><span class="avg-label">Weight trend</span><span class="avg-val">${(()=>{const w=weekDays.filter(d=>d.weight);if(w.length<2)return'—';const diff=w[w.length-1].weight-w[0].weight;return(diff>=0?'+':'')+diff.toFixed(1)+'kg'})()}</span></div>
+      <div class="avg-row"><span class="avg-label">Sleep score</span><span class="avg-val">${avgSleep?Math.round(avgSleep):'—'}</span></div>
+      <div class="avg-row"><span class="avg-label">Weight change</span><span class="avg-val">${wtTrend!=null?(wtTrend>=0?'+':'')+wtTrend.toFixed(1)+'kg':'—'}</span></div>
     </div>
   </div>`;
 
-  // Calorie chart
+  // Charts — all 4 macros + combined
+  const labels = days.map(shortLabel);
+
   html += `
   <div class="chart-section">
     <div class="chart-card">
-      <div class="chart-title">🔥 Calories
-        <div class="chart-legend" style="margin:0;margin-left:auto">
-          <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>On target</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Close</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Below</div>
-          <div class="legend-item" style="gap:6px"><div style="width:16px;height:1.5px;background:var(--sky);margin-top:1px;opacity:0.6;border-top:1.5px dashed var(--sky)"></div>Target</div>
-        </div>
-      </div>
-      ${buildLineChart(days, d=>d.calories, T.calories, 'var(--sky)')}
+      <div class="chart-title">🔥 Calories vs Target</div>
+      <div class="chart-wrap"><canvas id="chartCal"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">💪 Protein</div>
-      ${buildLineChart(days, d=>d.protein, T.protein, '#22c55e', 'rgba(34,197,94,0.1)')}
+      <div class="chart-title">💪 Protein vs Target</div>
+      <div class="chart-wrap"><canvas id="chartProt"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">🌾 Carbs & Fat</div>
+      <div class="chart-wrap"><canvas id="chartCF"></canvas></div>
     </div>
   </div>`;
 
   document.getElementById('tab-macros').innerHTML = html;
+
+  // Build charts after DOM update
+  requestAnimationFrame(() => {
+    const calVals = days.map(d=>d.calories);
+    const protVals = days.map(d=>d.protein);
+    const carbVals = days.map(d=>d.carbs);
+    const fatVals = days.map(d=>d.fat);
+
+    // Calories
+    makeLineChart('chartCal', labels, [
+      {
+        label: 'Calories',
+        data: calVals,
+        borderColor: '#38abe4', backgroundColor: 'rgba(56,171,228,0.08)',
+        borderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+        pointBackgroundColor: calVals.map(v=>dotColor(v,T.calories)),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: false, spanGaps: true
+      },
+      {
+        label: 'Target',
+        data: days.map(()=>T.calories),
+        borderColor: 'rgba(56,171,228,0.35)', borderWidth: 1.5,
+        borderDash: [5,5], pointRadius: 0, fill: false
+      }
+    ], { unit: ' kcal', yMin: Math.min(...calVals.filter(v=>v))*0.85 });
+
+    // Protein
+    makeLineChart('chartProt', labels, [
+      {
+        label: 'Protein',
+        data: protVals,
+        borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.08)',
+        borderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+        pointBackgroundColor: protVals.map(v=>dotColor(v,T.protein)),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: false, spanGaps: true
+      },
+      {
+        label: 'Target',
+        data: days.map(()=>T.protein),
+        borderColor: 'rgba(34,197,94,0.35)', borderWidth: 1.5,
+        borderDash: [5,5], pointRadius: 0, fill: false
+      }
+    ], { unit: 'g' });
+
+    // Carbs + Fat combined
+    makeLineChart('chartCF', labels, [
+      {
+        label: 'Carbs',
+        data: carbVals,
+        borderColor: '#f97316', borderWidth: 2,
+        pointRadius: 4, pointHoverRadius: 6,
+        pointBackgroundColor: carbVals.map(v=>dotColor(v,T.carbs)),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: false, spanGaps: true, yAxisID: 'y'
+      },
+      {
+        label: 'Carbs target',
+        data: days.map(()=>T.carbs),
+        borderColor: 'rgba(249,115,22,0.3)', borderWidth: 1.5,
+        borderDash: [5,5], pointRadius: 0, fill: false, yAxisID: 'y'
+      },
+      {
+        label: 'Fat',
+        data: fatVals,
+        borderColor: '#a78bfa', borderWidth: 2,
+        pointRadius: 4, pointHoverRadius: 6,
+        pointBackgroundColor: fatVals.map(v=>dotColor(v,T.fat)),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: false, spanGaps: true, yAxisID: 'y2'
+      },
+      {
+        label: 'Fat target',
+        data: days.map(()=>T.fat),
+        borderColor: 'rgba(167,139,250,0.3)', borderWidth: 1.5,
+        borderDash: [5,5], pointRadius: 0, fill: false, yAxisID: 'y2'
+      }
+    ], { unit: 'g', y2: true, y2unit: 'g',
+      yMin: 0, yMax: Math.max(...carbVals.filter(v=>v), T.carbs)*1.2,
+      y2Min: 0, y2Max: Math.max(...fatVals.filter(v=>v), T.fat)*1.5
+    });
+  });
 }
 
 // ── TAB: SLEEP ────────────────────────────────────────────────────
 function renderSleep() {
-  const T = DATA.targets;
   const days = DATA.days;
+  const T = DATA.targets;
+  const labels = days.map(shortLabel);
+  const sleepDays = days.filter(d=>d.sleep);
 
-  let html = `<div class="section"><div class="section-label">Sleep Duration</div></div>
+  let html = `
   <div class="chart-section">
     <div class="chart-card">
-      <div class="chart-title">🌙 Hours Slept
-        <div class="chart-legend" style="margin:0;margin-left:auto">
-          <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Target met</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Close</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Below</div>
-        </div>
-      </div>
-      ${buildLineChart(days, d=>d.sleep?.hours||null, T.sleep, '#a78bfa', 'rgba(167,139,250,0.1)')}
+      <div class="chart-title">🌙 Sleep Duration & Score</div>
+      <div class="chart-wrap"><canvas id="chartSleepDur"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">⭐ Sleep Score</div>
-      ${buildLineChart(days, d=>d.sleep?.score||null, 85, '#38abe4', 'rgba(56,171,228,0.1)')}
+      <div class="chart-title">🔬 Sleep Stages Breakdown</div>
+      <div class="chart-wrap" style="height:180px"><canvas id="chartSleepStages"></canvas></div>
     </div>
   </div>
   <div class="section"><div class="section-label">Sleep Log</div></div>
-  <div class="chart-section">
-    <div class="chart-card">`;
+  <div class="chart-section"><div class="chart-card">`;
 
-  days.slice().reverse().filter(d=>d.sleep).forEach(d => {
+  sleepDays.slice().reverse().forEach(d => {
     const s = d.sleep;
     html += `<div class="avg-row">
       <div>
         <div style="font-size:12px;font-weight:600;color:var(--navy)">${d.label}</div>
-        <div style="font-size:11px;color:rgba(26,58,82,0.5)">${s.bed} → ${s.wake}</div>
+        <div style="font-size:11px;color:rgba(26,58,82,0.5)">${s.bed} → ${s.wake} · Deep: ${s.deep?.label||'—'} · REM: ${s.rem?.label||'—'}</div>
       </div>
       <div style="text-align:right">
-        <div class="avg-val">${s.duration}</div>
+        <div style="font-family:var(--font-mono);font-size:14px;font-weight:700">${s.duration}</div>
         <span class="score-badge ${scoreClass(s.score)}">${s.score}</span>
       </div>
     </div>`;
   });
 
   html += `</div></div>`;
-
-  // Sleep stages chart
-  html += `<div class="section"><div class="section-label">Sleep Stages (Last 7 Days)</div></div>
-  <div class="chart-section">
-    <div class="chart-card">
-      <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#1e3a5f"></div>Deep</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#7da4e8"></div>REM</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#84cdec"></div>Light</div>
-      </div>
-      ${buildLineChart(days.slice(-7), d=>d.sleep?.deep?.hours||null, 1.5, '#1e3a5f', 'rgba(30,58,95,0.08)')}
-    </div>
-  </div>`;
-
   document.getElementById('tab-sleep').innerHTML = html;
+
+  requestAnimationFrame(() => {
+    const durVals = days.map(d=>d.sleep?.hours||null);
+    const scoreVals = days.map(d=>d.sleep?.score||null);
+
+    // Duration + Score dual axis
+    makeLineChart('chartSleepDur', labels, [
+      {
+        label: 'Hours',
+        data: durVals,
+        borderColor: '#7da4e8', backgroundColor: 'rgba(125,164,232,0.08)',
+        borderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+        pointBackgroundColor: durVals.map(v=>dotColor(v,T.sleep)),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: true, spanGaps: true, yAxisID: 'y'
+      },
+      {
+        label: 'Target hrs',
+        data: days.map(()=>T.sleep),
+        borderColor: 'rgba(125,164,232,0.35)', borderWidth: 1.5,
+        borderDash: [5,5], pointRadius: 0, fill: false, yAxisID: 'y'
+      },
+      {
+        label: 'Score',
+        data: scoreVals,
+        borderColor: '#f97316', borderWidth: 2,
+        pointRadius: 4, pointHoverRadius: 6,
+        pointBackgroundColor: scoreVals.map(v=>v>=85?'#22c55e':v>=75?'#f97316':'#ef4444'),
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: false, spanGaps: true, yAxisID: 'y2'
+      }
+    ], {
+      y: true, y2: true,
+      yMin: 0, yMax: 12, unit: 'h',
+      y2Min: 50, y2Max: 100, y2unit: ''
+    });
+
+    // Sleep stages stacked bar
+    const stageDays = days.filter(d=>d.sleep);
+    const stageLabels = stageDays.map(shortLabel);
+    destroyChart('chartSleepStages');
+    const ctx2 = document.getElementById('chartSleepStages')?.getContext('2d');
+    if(ctx2) {
+      charts['chartSleepStages'] = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: stageLabels,
+          datasets: [
+            {
+              label: 'Deep',
+              data: stageDays.map(d=>+(d.sleep?.deep?.hours||0).toFixed(2)),
+              backgroundColor: '#1e3a5f', borderRadius: 2
+            },
+            {
+              label: 'REM',
+              data: stageDays.map(d=>+(d.sleep?.rem?.hours||0).toFixed(2)),
+              backgroundColor: '#7da4e8', borderRadius: 2
+            },
+            {
+              label: 'Light',
+              data: stageDays.map(d=>+(d.sleep?.light?.hours||0).toFixed(2)),
+              backgroundColor: '#c9eeff', borderRadius: 2
+            },
+            {
+              label: 'Awake',
+              data: stageDays.map(d=>+(d.sleep?.awake?.hours||0).toFixed(2)),
+              backgroundColor: 'rgba(239,68,68,0.4)', borderRadius: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { boxWidth: 10, padding: 8, font: { size: 10 } } },
+            tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}h` } }
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 0, maxTicksLimit: 7 } },
+            y: { stacked: true, grid: { color: 'rgba(56,171,228,0.08)' }, ticks: { font: { size: 9 }, callback: v=>v+'h' } }
+          }
+        }
+      });
+    }
+  });
 }
 
 // ── TAB: WEIGHT ───────────────────────────────────────────────────
 function renderWeight() {
   const days = DATA.days;
-  const weightDays = days.filter(d=>d.weight);
   const startW = DATA.meta?.startWeight || 59;
+  const weightDays = days.filter(d=>d.weight);
+  const allWeights = weightDays.map(d=>d.weight);
+  const minW = Math.min(...allWeights, startW) - 0.3;
+  const maxW = Math.max(...allWeights, startW) + 0.3;
+  const labels = days.map(shortLabel);
+  const wtVals = days.map(d=>d.weight||null);
+
+  const curr = weightDays.length ? weightDays[weightDays.length-1].weight : startW;
+  const change = curr - startW;
 
   let html = `
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-value">${weightDays.length?weightDays[weightDays.length-1].weight:startW}<span class="stat-unit">kg</span></div>
-      <div class="stat-label">Current weight</div>
+  <div class="macros-row" style="grid-template-columns:1fr 1fr;gap:10px">
+    <div class="macro-card" style="padding:16px 12px">
+      <div class="macro-val" style="font-size:22px">${curr}kg</div>
+      <div class="macro-label">Current</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-value">${startW}<span class="stat-unit">kg</span></div>
-      <div class="stat-label">Start weight</div>
+    <div class="macro-card" style="padding:16px 12px">
+      <div class="macro-val" style="font-size:22px;color:${change>=0?'#22c55e':'#ef4444'}">${change>=0?'+':''}${change.toFixed(1)}kg</div>
+      <div class="macro-label">Since start</div>
     </div>
   </div>
-  <div class="section"><div class="section-label">Weight Trend</div></div>
   <div class="chart-section">
     <div class="chart-card">
-      ${buildLineChart(days, d=>d.weight, startW + (days.length * 0.3/7), '#22c55e', 'rgba(34,197,94,0.08)')}
+      <div class="chart-title">⚖️ Weight — Zoomed In</div>
+      <div class="chart-wrap" style="height:180px"><canvas id="chartWeight"></canvas></div>
     </div>
   </div>
   <div class="section"><div class="section-label">Weight Log</div></div>
@@ -571,14 +565,34 @@ function renderWeight() {
         <div style="font-size:11px;color:rgba(26,58,82,0.5)">${d.workout||''}</div>
       </div>
       <div style="text-align:right">
-        <div class="avg-val">${d.weight} kg</div>
-        ${diff!==null?`<div style="font-size:11px;color:${diff>=0?'#22c55e':'#ef4444'}">${diff>=0?'+':''}${diff.toFixed(1)}kg</div>`:''}
+        <div style="font-family:var(--font-mono);font-size:14px;font-weight:700">${d.weight} kg</div>
+        ${diff!=null?`<div style="font-size:11px;color:${diff>=0?'#22c55e':'#ef4444'}">${diff>=0?'+':''}${diff.toFixed(1)}kg</div>`:'<div style="font-size:11px;color:rgba(26,58,82,0.3)">start</div>'}
       </div>
     </div>`;
   });
 
   html += `</div></div>`;
   document.getElementById('tab-weight').innerHTML = html;
+
+  requestAnimationFrame(() => {
+    makeLineChart('chartWeight', labels, [
+      {
+        label: 'Weight',
+        data: wtVals,
+        borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.08)',
+        borderWidth: 2.5, pointRadius: 5, pointHoverRadius: 8,
+        pointBackgroundColor: '#22c55e',
+        pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.3, fill: true, spanGaps: true
+      },
+      {
+        label: 'Start',
+        data: days.map(()=>startW),
+        borderColor: 'rgba(26,58,82,0.2)', borderWidth: 1.5,
+        borderDash: [4,4], pointRadius: 0, fill: false
+      }
+    ], { unit: 'kg', yMin: minW, yMax: maxW });
+  });
 }
 
 // ── TAB: LOG ──────────────────────────────────────────────────────
@@ -586,13 +600,13 @@ function renderLog() {
   const days = DATA.days;
   const T = DATA.targets;
 
-  let html = `<div class="section"><div class="section-label">All Days</div></div>
-  <div class="chart-section">`;
+  let html = `<div class="section" style="padding-bottom:12px">
+    <div class="section-label">All ${days.length} Days</div>`;
 
   days.slice().reverse().forEach(d => {
-    const isNull = d.calories === null;
-    html += `<div class="chart-card" style="margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${isNull?0:10}px">
+    const isNull = d.calories===null;
+    html += `<div class="log-item">
+      <div class="log-item-header">
         <div>
           <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--sky)">DAY ${d.day} · ${d.label}</div>
           <div style="font-size:12px;color:var(--navy);font-weight:600;margin-top:2px">${d.workout||'—'}</div>
@@ -604,18 +618,17 @@ function renderLog() {
       </div>
       ${isNull
         ? `<div class="in-progress">⏳ In progress</div>`
-        : `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-          ${[
-            {l:'Cal',v:d.calories,t:T.calories,u:''},
-            {l:'Prot',v:d.protein,t:T.protein,u:'g'},
-            {l:'Carbs',v:d.carbs,t:T.carbs,u:'g'},
-            {l:'Fat',v:d.fat,t:T.fat,u:'g'},
-          ].map(m=>`<div style="text-align:center;background:rgba(56,171,228,0.06);border-radius:8px;padding:6px 4px">
-            <div style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:${dotColor(m.v,m.t)}">${m.v}${m.u}</div>
-            <div style="font-size:9px;color:rgba(26,58,82,0.4)">${m.l}</div>
-          </div>`).join('')}
+        : `<div class="log-macro-grid">
+          ${[{l:'Cal',v:d.calories,t:T.calories},{l:'Prot',v:d.protein+'g',t:T.protein},{l:'Carbs',v:d.carbs+'g',t:T.carbs},{l:'Fat',v:d.fat+'g',t:T.fat}]
+            .map(m=>`<div class="log-macro">
+              <div class="log-macro-val" style="color:${dotColor(typeof m.v==='number'?m.v:parseFloat(m.v),m.t)}">${m.v}</div>
+              <div class="log-macro-label">${m.l}</div>
+            </div>`).join('')}
         </div>`
       }
+      ${d.sleep?`<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(56,171,228,0.08);font-size:11px;color:rgba(26,58,82,0.5)">
+        😴 ${d.sleep.duration} · Score ${d.sleep.score} · Deep ${d.sleep.deep?.label||'—'} · REM ${d.sleep.rem?.label||'—'}
+      </div>`:''}
     </div>`;
   });
 
@@ -624,26 +637,20 @@ function renderLog() {
 }
 
 // ── TABS ──────────────────────────────────────────────────────────
-const TABS = { macros: renderMacros, sleep: renderSleep, weight: renderWeight, log: renderLog };
+const TABS = { macros:renderMacros, sleep:renderSleep, weight:renderWeight, log:renderLog };
 let rendered = new Set();
 
 function showTab(name, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['macros','sleep','weight','log'].forEach(t => {
+  ['macros','sleep','weight','log'].forEach(t=>{
     document.getElementById('tab-'+t).style.display = t===name?'block':'none';
   });
-  if(!rendered.has(name) && DATA) {
-    TABS[name]();
-    rendered.add(name);
-  }
+  if(!rendered.has(name) && DATA) { TABS[name](); rendered.add(name); }
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
 function render() {
-  renderMacros();
-  rendered.add('macros');
-  // Update footer
+  renderMacros(); rendered.add('macros');
   const T = DATA.targets;
   document.getElementById('footer').textContent =
     `ROHIT · Lean Bulk · ${T.calories} kcal · ${T.protein}g P · ${T.carbs}g C · ${T.fat}g F`;
