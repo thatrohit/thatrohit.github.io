@@ -81,12 +81,18 @@
       if(!r.ok) throw new Error('log.json not found');
       const data = await r.json();
 
-      // Photo stored separately in data/photo.txt (base64)
-      // Try fetching it
+      // Photo stored as fitness/data/photo.jpg
       let photoSrc = '';
       try {
-        const pr = await fetch('/fitness/data/photo.txt');
-        if(pr.ok) photoSrc = await pr.text();
+        const pr = await fetch('/fitness/data/photo.jpg');
+        if(pr.ok) {
+          const blob = await pr.blob();
+          photoSrc = await new Promise(res => {
+            const reader = new FileReader();
+            reader.onload = () => res(reader.result);
+            reader.readAsDataURL(blob);
+          });
+        }
       } catch(e) {}
 
       // Re-inject with photo
