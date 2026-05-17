@@ -1,0 +1,502 @@
+{
+  "meta": {
+    "name": "Rohit",
+    "age": 38,
+    "height": "5'8\"",
+    "startWeight": 59,
+    "bodyFat": 20,
+    "goal": "Lean Bulk",
+    "gym": "Synergyfit",
+    "conditions": [
+      "Prediabetic"
+    ],
+    "program": "PPL×2 Split",
+    "startDate": "2026-05-03"
+  },
+  "targets": {
+    "calories": 2330,
+    "protein": 170,
+    "carbs": 240,
+    "fat": 75,
+    "sleep": 7.5,
+    "weightGainPerWeek": 0.3
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2026-05-03",
+      "label": "Sun, May 3",
+      "workout": "Rest Day",
+      "calories": 2050,
+      "protein": 170,
+      "carbs": 173,
+      "fat": 45,
+      "weight": null,
+      "sleep": {
+        "duration": "9h 0m",
+        "hours": 9,
+        "score": 91,
+        "bed": "8:59 PM",
+        "wake": "6:01 AM",
+        "deep": {
+          "hours": 2.13,
+          "label": "2h 8m"
+        },
+        "rem": {
+          "hours": 1.8,
+          "label": "1h 48m"
+        },
+        "light": {
+          "hours": 5.05,
+          "label": "5h 3m"
+        },
+        "awake": {
+          "hours": 0.03,
+          "label": "2m"
+        }
+      }
+    },
+    {
+      "day": 2,
+      "date": "2026-05-04",
+      "label": "Mon, May 4",
+      "workout": "Pull · Back",
+      "calories": 2476,
+      "protein": 169,
+      "carbs": 222,
+      "fat": 103,
+      "weight": 58.1,
+      "sleep": {
+        "duration": "6h 12m",
+        "hours": 6.2,
+        "score": 69,
+        "bed": "10:32 PM",
+        "wake": "5:58 AM",
+        "deep": {
+          "hours": 1.5,
+          "label": "1h 30m"
+        },
+        "rem": {
+          "hours": 1.03,
+          "label": "1h 2m"
+        },
+        "light": {
+          "hours": 3.65,
+          "label": "3h 39m"
+        },
+        "awake": {
+          "hours": 1.23,
+          "label": "1h 14m"
+        }
+      }
+    },
+    {
+      "day": 3,
+      "date": "2026-05-05",
+      "label": "Tue, May 5",
+      "workout": "Legs",
+      "calories": 2086,
+      "protein": 188,
+      "carbs": 240,
+      "fat": 47,
+      "weight": 58.3,
+      "sleep": {
+        "duration": "6h 29m",
+        "hours": 6.48,
+        "score": 71,
+        "bed": "11:29 PM",
+        "wake": "6:35 AM",
+        "deep": {
+          "hours": 1.35,
+          "label": "1h 21m"
+        },
+        "rem": {
+          "hours": 0.98,
+          "label": "59m"
+        },
+        "light": {
+          "hours": 3.85,
+          "label": "3h 51m"
+        },
+        "awake": {
+          "hours": 0.6,
+          "label": "36m"
+        }
+      }
+    },
+    {
+      "day": 4,
+      "date": "2026-05-06",
+      "label": "Wed, May 6",
+      "workout": "Legs",
+      "calories": 2226,
+      "protein": 187,
+      "carbs": 253,
+      "fat": 55,
+      "weight": 58.7,
+      "sleep": {
+        "duration": "5h 44m",
+        "hours": 5.73,
+        "score": 75,
+        "bed": "11:40 PM",
+        "wake": "5:34 AM",
+        "deep": {
+          "hours": 0.85,
+          "label": "51m"
+        },
+        "rem": {
+          "hours": 1.35,
+          "label": "1h 21m"
+        },
+        "light": {
+          "hours": 3.47,
+          "label": "3h 28m"
+        },
+        "awake": {
+          "hours": 0.15,
+          "label": "9m"
+        }
+      }
+    },
+    {
+      "day": 5,
+      "date": "2026-05-07",
+      "label": "Thu, May 7",
+      "workout": "Rest Day",
+      "calories": 2670,
+      "protein": 205,
+      "carbs": 221,
+      "fat": 109,
+      "weight": 58.7,
+      "sleep": {
+        "duration": "7h 10m",
+        "hours": 7.17,
+        "score": 85,
+        "bed": "10:56 PM",
+        "wake": "6:13 AM",
+        "deep": {
+          "hours": 1.27,
+          "label": "1h 16m"
+        },
+        "rem": {
+          "hours": 1.63,
+          "label": "1h 38m"
+        },
+        "light": {
+          "hours": 4,
+          "label": "4h"
+        },
+        "awake": {
+          "hours": 0.1,
+          "label": "6m"
+        }
+      }
+    },
+    {
+      "day": 6,
+      "date": "2026-05-08",
+      "label": "Fri, May 8",
+      "workout": "Push · Hypertrophy",
+      "calories": 2594,
+      "protein": 203,
+      "carbs": 286,
+      "fat": 74,
+      "weight": 58.7,
+      "sleep": {
+        "duration": "7h 31m",
+        "hours": 7.52,
+        "score": 86,
+        "bed": "10:47 PM",
+        "wake": "6:27 AM",
+        "deep": {
+          "hours": 2.07,
+          "label": "2h 4m"
+        },
+        "rem": {
+          "hours": 1.05,
+          "label": "1h 3m"
+        },
+        "light": {
+          "hours": 4.12,
+          "label": "4h 7m"
+        },
+        "awake": {
+          "hours": 0.15,
+          "label": "9m"
+        }
+      }
+    },
+    {
+      "day": 7,
+      "date": "2026-05-09",
+      "label": "Sat, May 9",
+      "workout": "Pull · Hypertrophy",
+      "calories": 1830,
+      "protein": 141,
+      "carbs": 180,
+      "fat": 65,
+      "weight": 58.6,
+      "sleep": {
+        "duration": "3h 52m",
+        "hours": 3.87,
+        "score": 61,
+        "bed": "2:28 AM",
+        "wake": "6:22 AM",
+        "deep": {
+          "hours": 1.2,
+          "label": "1h 12m"
+        },
+        "rem": {
+          "hours": 0.32,
+          "label": "19m"
+        },
+        "light": {
+          "hours": 2.3,
+          "label": "2h 18m"
+        },
+        "awake": {
+          "hours": 0.03,
+          "label": "2m"
+        }
+      }
+    },
+    {
+      "day": 8,
+      "date": "2026-05-10",
+      "label": "Sun, May 10",
+      "workout": "Rest Day",
+      "calories": 2317,
+      "protein": 191,
+      "carbs": 215,
+      "fat": 80,
+      "weight": 58.6,
+      "sleep": {
+        "duration": "9h 27m",
+        "hours": 9.45,
+        "score": 94,
+        "bed": "9:55 PM",
+        "wake": "7:31 AM",
+        "deep": {
+          "hours": 1.65,
+          "label": "1h 39m"
+        },
+        "rem": {
+          "hours": 1.75,
+          "label": "1h 45m"
+        },
+        "light": {
+          "hours": 5.88,
+          "label": "5h 53m"
+        },
+        "awake": {
+          "hours": 0.15,
+          "label": "9m"
+        }
+      }
+    },
+    {
+      "day": 9,
+      "date": "2026-05-11",
+      "label": "Mon, May 11",
+      "workout": "Push · Strength",
+      "calories": 2497,
+      "protein": 161,
+      "carbs": 303,
+      "fat": 67,
+      "weight": 58.8,
+      "sleep": {
+        "duration": "7h 47m",
+        "hours": 7.78,
+        "score": 86,
+        "bed": "10:33 PM",
+        "wake": "6:30 AM",
+        "deep": {
+          "hours": 1.42,
+          "label": "1h 25m"
+        },
+        "rem": {
+          "hours": 1.27,
+          "label": "1h 16m"
+        },
+        "light": {
+          "hours": 4.75,
+          "label": "4h 45m"
+        },
+        "awake": {
+          "hours": 0.17,
+          "label": "10m"
+        }
+      }
+    },
+    {
+      "day": 10,
+      "date": "2026-05-12",
+      "label": "Tue, May 12",
+      "workout": "Pull · Strength",
+      "calories": 2632,
+      "protein": 172,
+      "carbs": 231,
+      "fat": 107,
+      "weight": 59.2,
+      "sleep": {
+        "duration": "6h 58m",
+        "hours": 6.97,
+        "score": 84,
+        "bed": "10:28 PM",
+        "wake": "5:26 AM",
+        "deep": {
+          "hours": 1.18,
+          "label": "1h 11m"
+        },
+        "rem": {
+          "hours": 1.63,
+          "label": "1h 38m"
+        },
+        "light": {
+          "hours": 3.87,
+          "label": "3h 52m"
+        },
+        "awake": {
+          "hours": 0,
+          "label": "0m"
+        }
+      }
+    },
+    {
+      "day": 11,
+      "date": "2026-05-13",
+      "label": "Wed, May 13",
+      "workout": "Legs",
+      "calories": 2158,
+      "protein": 215,
+      "carbs": 199,
+      "fat": 53,
+      "weight": 59.2,
+      "sleep": {
+        "duration": "8h 34m",
+        "hours": 8.57,
+        "score": 90,
+        "bed": "8:43 PM",
+        "wake": "5:22 AM",
+        "deep": {
+          "hours": 1.95,
+          "label": "1h 57m"
+        },
+        "rem": {
+          "hours": 1.72,
+          "label": "1h 43m"
+        },
+        "light": {
+          "hours": 4.67,
+          "label": "4h 40m"
+        },
+        "awake": {
+          "hours": 0.08,
+          "label": "5m"
+        }
+      }
+    },
+    {
+      "day": 12,
+      "date": "2026-05-14",
+      "label": "Thu, May 14",
+      "workout": "Rest Day",
+      "calories": 2042,
+      "protein": 147,
+      "carbs": 137,
+      "fat": 95,
+      "weight": 58.9,
+      "sleep": {
+        "duration": "6h 45m",
+        "hours": 6.75,
+        "score": 85,
+        "bed": "10:48 PM",
+        "wake": "5:44 AM",
+        "deep": {
+          "hours": 1.43,
+          "label": "1h 26m"
+        },
+        "rem": {
+          "hours": 1.68,
+          "label": "1h 41m"
+        },
+        "light": {
+          "hours": 3.52,
+          "label": "3h 31m"
+        },
+        "awake": {
+          "hours": 0.18,
+          "label": "11m"
+        }
+      }
+    },
+    {
+      "day": 13,
+      "date": "2026-05-15",
+      "label": "Fri, May 15",
+      "workout": "Push · Hypertrophy",
+      "calories": 2291,
+      "protein": 201,
+      "carbs": 182,
+      "fat": 80,
+      "weight": 58.8,
+      "sleep": {
+        "duration": "6h 53m",
+        "hours": 6.88,
+        "score": 81,
+        "bed": "10:47 PM",
+        "wake": "5:45 AM",
+        "deep": {
+          "hours": 0.9,
+          "label": "54m"
+        },
+        "rem": {
+          "hours": 1.45,
+          "label": "1h 27m"
+        },
+        "light": {
+          "hours": 4.3,
+          "label": "4h 18m"
+        },
+        "awake": {
+          "hours": 0.08,
+          "label": "5m"
+        }
+      }
+    },
+    {
+      "day": 14,
+      "date": "2026-05-16",
+      "label": "Sat, May 16",
+      "workout": "Pull · Hypertrophy",
+      "calories": 1822,
+      "protein": 128,
+      "carbs": 174,
+      "fat": 64,
+      "weight": 58.6,
+      "sleep": {
+        "duration": "7h 5m",
+        "hours": 7.08,
+        "score": 81,
+        "bed": "11:12 PM",
+        "wake": "6:23 AM",
+        "deep": {
+          "hours": 1.08,
+          "label": "1h 5m"
+        },
+        "rem": {
+          "hours": 1.27,
+          "label": "1h 16m"
+        },
+        "light": {
+          "hours": 4.55,
+          "label": "4h 33m"
+        },
+        "awake": {
+          "hours": 0.08,
+          "label": "5m"
+        }
+      }
+    }
+  ]
+}
