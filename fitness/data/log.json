@@ -603,6 +603,40 @@
       "fat": null,
       "weight": null,
       "sleep": null
+    },
+    {
+      "day": 22,
+      "date": "2026-05-24",
+      "label": "Sun, May 24",
+      "workout": "Rest Day",
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null,
+      "weight": 58.3,
+      "sleep": {
+        "duration": "8h 11m",
+        "hours": 8.18,
+        "score": 88,
+        "bed": "11:03 PM",
+        "wake": "7:24 AM",
+        "deep": {
+          "hours": 1.45,
+          "label": "1h 27m"
+        },
+        "rem": {
+          "hours": 1.65,
+          "label": "1h 39m"
+        },
+        "light": {
+          "hours": 4.75,
+          "label": "4h 45m"
+        },
+        "awake": {
+          "hours": 0.17,
+          "label": "10m"
+        }
+      }
     }
   ]
 }
