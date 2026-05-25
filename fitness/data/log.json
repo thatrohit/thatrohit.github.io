@@ -661,6 +661,40 @@
           "label": "10m"
         }
       }
+    },
+    {
+      "day": 23,
+      "date": "2026-05-25",
+      "label": "Mon, May 25",
+      "workout": "Push · Strength",
+      "calories": 1831,
+      "protein": 133,
+      "carbs": 206,
+      "fat": 58,
+      "weight": 58.4,
+      "sleep": {
+        "duration": "7h 25m",
+        "hours": 7.42,
+        "score": 86,
+        "bed": "10:40 PM",
+        "wake": "6:10 AM",
+        "deep": {
+          "hours": 1.23,
+          "label": "1h 14m"
+        },
+        "rem": {
+          "hours": 1.27,
+          "label": "1h 16m"
+        },
+        "light": {
+          "hours": 4.72,
+          "label": "4h 43m"
+        },
+        "awake": {
+          "hours": 0.08,
+          "label": "5m"
+        }
+      }
     }
   ]
 }
