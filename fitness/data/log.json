@@ -695,6 +695,40 @@
           "label": "5m"
         }
       }
+    },
+    {
+      "day": 24,
+      "date": "2026-05-26",
+      "label": "Tue, May 26",
+      "workout": "Pull · Strength",
+      "calories": 2200,
+      "protein": 172,
+      "carbs": 265,
+      "fat": 58,
+      "weight": 58.4,
+      "sleep": {
+        "duration": "6h 32m",
+        "hours": 6.53,
+        "score": 82,
+        "bed": "10:36 PM",
+        "wake": "5:11 AM",
+        "deep": {
+          "hours": 1.77,
+          "label": "1h 46m"
+        },
+        "rem": {
+          "hours": 1.33,
+          "label": "1h 20m"
+        },
+        "light": {
+          "hours": 3.28,
+          "label": "3h 17m"
+        },
+        "awake": {
+          "hours": 0.05,
+          "label": "3m"
+        }
+      }
     }
   ]
 }
