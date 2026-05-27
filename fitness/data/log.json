@@ -729,6 +729,40 @@
           "label": "3m"
         }
       }
+    },
+    {
+      "day": 25,
+      "date": "2026-05-27",
+      "label": "Wed, May 27",
+      "workout": "Legs",
+      "calories": 2383,
+      "protein": 193,
+      "carbs": 221,
+      "fat": 86,
+      "weight": 58.5,
+      "sleep": {
+        "duration": "6h 51m",
+        "hours": 6.85,
+        "score": 81,
+        "bed": "11:26 PM",
+        "wake": "6:35 AM",
+        "deep": {
+          "hours": 1.33,
+          "label": "1h 20m"
+        },
+        "rem": {
+          "hours": 1.3,
+          "label": "1h 18m"
+        },
+        "light": {
+          "hours": 3.97,
+          "label": "3h 58m"
+        },
+        "awake": {
+          "hours": 0.3,
+          "label": "18m"
+        }
+      }
     }
   ]
 }
