@@ -797,6 +797,40 @@
           "label": "1m"
         }
       }
+    },
+    {
+      "day": 27,
+      "date": "2026-05-29",
+      "label": "Fri, May 29",
+      "workout": "Push · Hypertrophy",
+      "calories": 2218,
+      "protein": 173,
+      "carbs": 219,
+      "fat": 80,
+      "weight": 58.6,
+      "sleep": {
+        "duration": "7h 27m",
+        "hours": 7.45,
+        "score": 79,
+        "bed": "9:54 PM",
+        "wake": "7:10 AM",
+        "deep": {
+          "hours": 1.72,
+          "label": "1h 43m"
+        },
+        "rem": {
+          "hours": 1.83,
+          "label": "1h 50m"
+        },
+        "light": {
+          "hours": 3.73,
+          "label": "3h 44m"
+        },
+        "awake": {
+          "hours": 1.82,
+          "label": "1h 49m"
+        }
+      }
     }
   ]
 }
