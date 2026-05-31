@@ -865,6 +865,40 @@
           "label": "2m"
         }
       }
+    },
+    {
+      "day": 29,
+      "date": "2026-05-31",
+      "label": "Sun, May 31",
+      "workout": "Rest Day",
+      "calories": 2605,
+      "protein": 167,
+      "carbs": 329,
+      "fat": 70,
+      "weight": 58.9,
+      "sleep": {
+        "duration": "7h 29m",
+        "hours": 7.48,
+        "score": 86,
+        "bed": "9:24 PM",
+        "wake": "4:57 AM",
+        "deep": {
+          "hours": 1.37,
+          "label": "1h 22m"
+        },
+        "rem": {
+          "hours": 1.37,
+          "label": "1h 22m"
+        },
+        "light": {
+          "hours": 4.53,
+          "label": "4h 32m"
+        },
+        "awake": {
+          "hours": 0.05,
+          "label": "3m"
+        }
+      }
     }
   ]
 }
