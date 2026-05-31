@@ -831,6 +831,40 @@
           "label": "1h 49m"
         }
       }
+    },
+    {
+      "day": 28,
+      "date": "2026-05-30",
+      "label": "Sat, May 30",
+      "workout": "Pull · Hypertrophy",
+      "calories": 2047,
+      "protein": 175,
+      "carbs": 199,
+      "fat": 68,
+      "weight": 58.9,
+      "sleep": {
+        "duration": "6h 31m",
+        "hours": 6.52,
+        "score": 79,
+        "bed": "12:09 AM",
+        "wake": "6:42 AM",
+        "deep": {
+          "hours": 1.25,
+          "label": "1h 15m"
+        },
+        "rem": {
+          "hours": 1.43,
+          "label": "1h 26m"
+        },
+        "light": {
+          "hours": 3.55,
+          "label": "3h 33m"
+        },
+        "awake": {
+          "hours": 0.03,
+          "label": "2m"
+        }
+      }
     }
   ]
 }
